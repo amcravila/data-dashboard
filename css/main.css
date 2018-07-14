@@ -48,7 +48,7 @@ ul li {
   padding-right: 20px;
 }
 
-ul{
+ul {
   margin: 0;
 }
 
@@ -72,21 +72,22 @@ ul li:hover {
   cursor: pointer;
 }
 
-ul li ul.dropDown {
+ul li .dropDown {
   min-width: 100%;
   display: none;
   position: absolute;
 }
 
-ul li:hover ul.dropDown {
+ul li:hover .dropDown {
   display: block;
   margin: 0;
   padding: 0;
 }
 
-ul li ul.dropDown li {
+ul li .dropDown option {
   display: block;
   text-align: left;
+  pointer-events: auto;
 }
 
 /* Números e Títulos: font-family: 'Bitter', serif;*/
