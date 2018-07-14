@@ -1,6 +1,7 @@
 var subMenu = document.querySelectorAll('.subMenu');
 for(var i=0; i < subMenu.length; i++) {
   subMenu[i].addEventListener('click', showMenu);
+  subMenu[i].addEventListener('click', overview);
 }
 
 function showMenu() {
@@ -27,3 +28,8 @@ function showMenu() {
 //     }
 //   }
 // }
+
+function overview(){
+  var sede = subMenu[i].value;
+  console.log(sede);
+}
