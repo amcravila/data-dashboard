@@ -40,6 +40,14 @@ header {
 }
 
 ul li {
+  background-color: #EBEBEB;
+}
+
+ul{
+  margin: 0;
+}
+.menu li {
+  padding: 20px 20px;
   display: inline-block;
   position: relative;
   line-height: 40px;
@@ -67,6 +75,8 @@ ul li ul.dropDown {
 
 ul li:hover ul.dropDown {
   display: block;
+  margin: 0;
+  padding: 0;
 }
 
 ul li ul.dropDown li {
