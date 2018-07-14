@@ -26,44 +26,52 @@ header {
   align-items: center;
 }
 
-nav {
-  height: 50px;
-  background-color: #EBEBEB;
-}
-
-.menu ul {
+.menu {
+  padding: 0;
   list-style: none;
-  background-color: #EBEBEB;
+  background: #f2f2f2;
 }
 
-.menu li {
-  padding: 20px 20px;
+.dropDown {
+  padding: 0;
+  list-style: none;
+  background: #f2f2f2;
+  width: 40px;
+}
+
+ul li {
   display: inline-block;
+  position: relative;
+  line-height: 40px;
+  text-align: left;
+  padding-right: 20px;
 }
 
-.itemMenu {
-  padding-left: 0px;
-  width: 130px;
-  top: 159px;
-  position: absolute;
-}
-
-.itemMenu li {
+ul li a {
   display: block;
+  color: #000;
+  text-decoration: none;
 }
 
-.hide {
-  display: none;
-}
-
-.show {
-  display: block;
-}
-
-.menu li:hover {
-  background-color: rgba(0,0,0,.3);
+ul li:hover {
+  color: #fff;
+  background: #939393;
   cursor: pointer;
 }
 
+ul li ul.dropDown {
+  min-width: 100%;
+  display: none;
+  position: absolute;
+}
+
+ul li:hover ul.dropDown {
+  display: block;
+}
+
+ul li ul.dropDown li {
+  display: block;
+  text-align: left;
+}
 
 /* Números e Títulos: font-family: 'Bitter', serif;*/
