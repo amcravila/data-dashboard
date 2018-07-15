@@ -8,7 +8,7 @@ var hostCitySCL = document.getElementById('SCL');
 hostCitySCL.addEventListener('mouseover', selectedHostCity);
 
 function selectedHostCity() {
-  var selectedHostCity = document.getElementById('students').innerHTML = this.id;
+  var selectedHostCity = document.getElementById('selectedFilter').innerHTML = this.id;
 }
 
 var studentsClasses = document.querySelectorAll('.studentsClass');
@@ -17,7 +17,7 @@ for(var i=0; i < studentsClasses.length; i++) {
 }
 
 function selectedClass(e) {
-  var selectedClass = document.getElementById('students').innerHTML = this.textContent;
+  var selectedClass = document.getElementById('selectedFilter').innerHTML = this.textContent;
   e.stopPropagation();
 }
 
