@@ -7,8 +7,10 @@ hostCityLIM.addEventListener('mouseover', selectedHostCity);
 var hostCitySCL = document.getElementById('SCL');
 hostCitySCL.addEventListener('mouseover', selectedHostCity);
 
+var selectedHostCity = document.getElementById('selectedFilter').innerHTML;
+
 function selectedHostCity() {
-  var selectedHostCity = document.getElementById('selectedFilter').innerHTML = this.id;
+  selectedHostCity = this.id;
 }
 
 var studentsClasses = document.querySelectorAll('.studentsClass');
@@ -16,9 +18,11 @@ for(var i=0; i < studentsClasses.length; i++) {
   studentsClasses[i].addEventListener('click', selectedClass);
 }
 
-function selectedClass(e) {
-  var selectedClass = document.getElementById('selectedFilter').innerHTML = this.textContent;
-  e.stopPropagation();
+var selectedClass = document.getElementById('selectedFilter').innerHTML;
+
+function selectedClass() {
+  selectedClass = this.textContent;
+  console.log(selectedClass);
 }
 
 
