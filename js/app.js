@@ -11,8 +11,6 @@
 
 var studentsClasses = document.querySelectorAll('.studentsClass');
 for(var i=0; i < studentsClasses.length; i++) {
-  studentsClasses[i].addEventListener('click', students);
-  studentsClasses[i].addEventListener('click', overview);
 }
 
 function students() {
