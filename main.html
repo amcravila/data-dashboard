@@ -14,41 +14,63 @@
   <header>
     <img id="logoLab" src="assets/images/Logo_Laboratoria.png">
   </header>
+
+  <!-- <select id="dropMenuSede">
+    <option value="none" selected>selecione sede</option>
+    <option value="AQP">Arequipa</option>
+    <option value="LIM">Lima</option>
+    <option value="CDMX">Cidade do México</option>
+    <option value="SCL">Santiago</option>
+  </select>
+  <select id="dropMenuTurma">
+    <option value="none" selected>selecione turma</option>
+    <option value="2016-2">2016-2</option>
+    <option value="2017-1">2017-1</option>
+    <option value="2017-2">2017-2</option>
+  </select> -->
+
   <nav>
     <ul class="menu">
       <li><a href="#home">Home</a></li>
-      <li class="subMenu">Arequipa
+      <li id="AQP">Arequipa
         <span class="icon-caret-down"></span>
         <ul class="dropDown">
-          <li><a href="#AQP2016-2">2016-2</a></li>
-          <li><a href="#AQP2017-1">2017-1</a></li>
+          <li name="2016-2" class="studentsClass"><a href="#AQP2016-2">2016-2</a></li>
+          <li name="2017-1" class="studentsClass"><a href="#AQP2017-1">2017-1</a></li>
         </ul>
       </li>
-      <li class="subMenu">CDMX
+      <li id="CDMX">Cidade do México
         <span class="icon-caret-down"></span>
         <ul class="dropDown">
-          <li><a href="#CDMX2017-1">2017-1</a></li>
-          <li><a href="#CDMX2017-2">2017-2</a></li>
+          <li name="2017-1" class="studentsClass"><a href="#CDMX2017-1">2017-1</a></li>
+          <li name="2017-2" class="studentsClass"><a href="#CDMX2017-2">2017-2</a></li>
         </ul>
       </li>
-      <li class="subMenu">Lima
+      <li id="LIM">Lima
         <span class="icon-caret-down"></span>
         <ul class="dropDown">
-          <li><a href="#LIM2016-2">2016-2</a></li>
-          <li><a href="#LIM2017-1">2017-1</a></li>
-          <li><a href="#LIM2017-2">2017-2</a></li>
+          <li name="2016-2" class="studentsClass"><a href="#LIM2016-2">2016-2</a></li>
+          <li name="2017-1" class="studentsClass"><a href="#LIM2017-1">2017-1</a></li>
+          <li name="2017-2" class="studentsClass"><a href="#LIM2017-2">2017-2</a></li>
         </ul>
       </li>
-      <li class="subMenu">Santiago
+      <li id="SCL">Santiago do Chile
         <span class="icon-caret-down"></span>
         <ul class="dropDown">
-          <li><a href="#SCL2016-2">2016-2</a></li>
-          <li><a href="#SCL2017-1">2017-1</a></li>
-          <li><a href="#SCL2017-2">2017-2</a></li>
+          <li name="2016-2" class="studentsClass"><a href="#SCL2016-2">2016-2</a></li>
+          <li name="2017-1" class="studentsClass"><a href="#SCL2017-1">2017-1</a></li>
+          <li name="2017-2" class="studentsClass"><a href="#SCL2017-2">2017-2</a></li>
         </ul>
       </li>
     </ul>
   </nav>
+
+  <section id="overview">
+  </section>
+
+  <section id="students">
+
+  </section>
 
   <script src="./js/data.js"></script>
   <script src="./js/app.js"></script>
