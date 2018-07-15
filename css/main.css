@@ -26,7 +26,7 @@ header {
   align-items: center;
 }
 
-.menu {
+#menu {
   padding: 0;
   list-style: none;
   background: #f2f2f2;
@@ -52,7 +52,7 @@ ul{
   margin: 0;
 }
 
-.menu li {
+#menu li {
   display: inline-block;
   position: relative;
   line-height: 40px;
