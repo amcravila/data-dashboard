@@ -12,7 +12,7 @@
 
 <body>
   <header>
-    <img id="logoLab" src="assets/images/Logo_Laboratoria.png">
+    <img id="logoLab" src="assets/images/Logo_Laboratoria.png" alt="LogoLaboratoria">
   </header>
 
   <!-- <select id="dropMenuSede">
@@ -67,11 +67,12 @@
 
   <section id="selectedFilter">
   </section>
-  
-  <section id="overview">
-  </section>
 
-  <section id="students">
+  <section id="tabs">
+    <ul>
+      <li id="overview"><button type="button" name="button" data-selectionTab>Geral</li>
+      <li id="students"><button type="button" name="button" data-selectionTab>Estudantes</li>
+    </ul>
   </section>
 
   <script src="./js/data.js"></script>
