@@ -1,50 +1,68 @@
-// var hostCityAQP = document.getElementById('AQP');
-// console.log(hostCityAQP);
-// hostCityAQP.addEventListener('mouseover', selectedHostCity);
-// var hostCityCDMX = document.getElementById('CDMX');
-// hostCityCDMX.addEventListener('mouseover', selectedHostCity);
-// var hostCityLIM = document.getElementById('LIM');
-// hostCityLIM.addEventListener('mouseover', selectedHostCity);
-// var hostCitySCL = document.getElementById('SCL');
-// hostCitySCL.addEventListener('mouseover', selectedHostCity);
-
-
-
-var hostCity = document.querySelectorAll('.hostCity');
-for(var i=0; i < hostCity.length; i++) {
-  hostCity[i].addEventListener('mouseover', selectedHostCity);
+var hostCities = document.querySelectorAll('.hostCity');
+for(var i=0; i < hostCities.length; i++) {
+  hostCities[i].addEventListener('mouseover', selectedHostCity);
 }
-function selectedHostCity() {
-  var selectedHostCity = document.getElementById('selectedCity').innerHTML = this.id;
 
+var selectedCity = document.getElementById('filterCity');
+
+function selectedHostCity(event) {
+  var selectedCity = document.getElementById('filterCity').innerHTML = this.id;
 }
 
 var studentsClasses = document.querySelectorAll('.studentsClass');
 for(var i=0; i < studentsClasses.length; i++) {
-  studentsClasses[i].addEventListener('click', selectedClass);
+  studentsClasses[i].addEventListener('click', selectedStudentClass);
+  studentsClasses[i].addEventListener('click', panel);
+}
+
+var selectedClass = document.getElementById('filterClass');
+
+function selectedStudentClass() {
+  var selectedClass = document.getElementById('filterClass').innerHTML = this.textContent;
 }
 
 
+function panel() {
+  var panelOne = document.createElement('li');
+  var tabOverview = document.createTextNode('OVERVIEW');
+  panelOne.appendChild(tabOverview);
+  document.getElementById('tabs').appendChild(panelOne);
 
-function selectedClass(e) {
-  var selectedClass = document.getElementById('selectedClass').innerHTML = this.textContent;
-  e.stopPropagation();
+  var panelTwo = document.createElement('li');
+  var tabStudents = document.createTextNode('ESTUDANTES');
+  panelTwo.appendChild(tabStudents);
+  document.getElementById('tabs').appendChild(panelTwo);
 
+  var studentsClasses = document.querySelectorAll('.studentsClass');
+    for(var i=0; i < studentsClasses.length; i++) {
+    studentsClasses[i].removeEventListener('click', panel);
+  }
+
+  panelOne.addEventListener('click', panelOverview);
+  panelTwo.addEventListener('click', panelStudents);
 }
 
-var selectedCity = document.getElementById('selectedCity');
-var selectedClass = document.getElementById('selectedClass');
+
+function panelStudents() {
+  var city = selectedCity.textContent;
+  var cityClass = selectedClass.textContent;
+  var students = document.getElementById('students');
+  students.innerHTML = '';
+
+  for (i in data[city][cityClass]) {
+    for (j in data[city][cityClass]['students']) {
+      var img = document.createElement('img');
+      img.src = data[city][cityClass]['students'][j]['photo'];
+      students.appendChild(img);
+      var pName = document.createElement('p');
+      var studentName = document.createTextNode(data[city][cityClass]['students'][j]['name']);
+      pName.appendChild(studentName);
+      students.appendChild(pName);
+    }
+  }
+}
 
 
-
-// function students() {
-//   var students = document.getElementById('students');
-//   students.innerHTML = "";
-//   for (turma in data[sede]) {
-//     for (i in data[sede][turma]["students"]) {
-//       var img = document.createElement("img");
-//       img.src = data[sede][turma]["students"][i]["photo"];
-//       students.appendChild(img);
-//     }
-//   }
-// }
+function panelOverview() {
+  alert("clicou Overview");
+}

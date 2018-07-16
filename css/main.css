@@ -95,4 +95,19 @@ ul li ul.dropDown li {
   color: #fff;
 }
 
+#filterCity, #filterClass {
+  font-size: 18px;
+}
+
+#tabs {
+  padding: 0;
+  margin-top: 80px;
+}
+
+/* #students {
+  display: flex;
+  flex-wrap: wrap;
+} */
+
+
 /* Números e Títulos: font-family: 'Bitter', serif;*/
