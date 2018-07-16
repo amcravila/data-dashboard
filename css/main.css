@@ -104,6 +104,10 @@ ul li ul.dropDown li {
   margin-top: 80px;
 }
 
+#hide {
+  display: none;
+}
+
 /* #students {
   display: flex;
   flex-wrap: wrap;
