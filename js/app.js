@@ -1,7 +1,7 @@
 //função selecionar SEDE
 var hostCities = document.querySelectorAll('.hostCity');
 for(var i=0; i < hostCities.length; i++) {
-  hostCities[i].addEventListener('mouseover', selectedHostCity);
+  hostCities[i].addEventListener('click', selectedHostCity);
 }
 
 var selectedCity = document.getElementById('filterCity');
@@ -26,14 +26,14 @@ function selectedStudentClass() {
 }
 
 // function closeMenu(){
-//   var menuDrop = document.getElementsByClassName('dropDown');
+//   var menuDrop = document.getElementsByClassName('dropDown')[0];
 //   for(var i=0; i < menuDrop.length; i++) {
-//     menuDrop.setAttribute('id', 'hide');
+//     menuDrop.setAttibuteID('id','hide');
 //   }
 // }
 
 
-//função exibir PAINE/ABAS
+//função exibir PAINEL/ABAS
 function panel() {
   var panelOne = document.createElement('li');
   var tabOverview = document.createTextNode('OVERVIEW');
@@ -63,31 +63,26 @@ function panelStudents() {
   var students = document.getElementById('students');
   students.innerHTML = '';
 
-//função estudantes ativas e inativas
-  var activeStudents = 0;
-  var desertionStudentsRate = 0;
-  var desertedStudents = 0;
-
-  for(var i=0; i<data[city][cityClass]['students'].length; i++){
-     if(data[city][cityClass]['students'][i].active === true ){
-       activeStudents++;
-     }
-     else{
-       desertedStudents++;
-     }
-   }
-
-
-
 //está duplicando, entrando no array RATINGS
   for (i in data[city][cityClass]) {
     for (j in data[city][cityClass]['students']) {
       var img = document.createElement('img');
+      img.setAttribute('id','studentPhoto');
       img.src = data[city][cityClass]['students'][j]['photo'];
       students.appendChild(img);
-      var pName = document.createElement('p');
-      var studentName = document.createTextNode(data[city][cityClass]['students'][j]['name']);        pName.appendChild(studentName);
-      students.appendChild(pName);
+
+      var sName = document.createElement('span');
+      sName.setAttribute('id','studentName');
+      var studentName = document.createTextNode(data[city][cityClass]['students'][j]['name']);
+      sName.appendChild(studentName);
+      students.appendChild(sName);
+
+      var tech = document.createElement('span');
+      tech.textContent = "TECH SKILLS";
+      tech.setAttribute('id','techSkills');
+      var techSkills = document.createTextNode(data[city][cityClass]['students'][j]['sprints']['tech']);
+      tech.appendChild(techSkills);
+      students.appendChild(tech);
       }
     }
 }
@@ -97,4 +92,35 @@ function panelStudents() {
 //função exibir dados na aba OVERVIEW
 function panelOverview() {
   alert("clicou Overview");
+
+  //função estudantes ativas e inativas
+    var activeStudents = 0;
+    var desertedStudents = 0;
+    var desertionStudentsRate = 0;
+
+    for(var i=0; i<data[city][cityClass]['students'].length; i++){
+       if(data[city][cityClass]['students'][i].active === true ){
+         activeStudents++;
+       }
+       else{
+         desertedStudents++;
+       }
+     }
+     totalStudents = activeStudents + desertedStudents;
+     desertionStudentsRate = desertedStudents/(desertedStudents+activeStudents)*100;
+
+
+//função NPS
+  var totalPromoters = 0;
+  var totalDetractors = 0;
+  var numSprints = 0;
+  var nps = 0;
+  for(var i = 0; i < data[city][cityClass]['ratings'].length; i++){
+    totalPromoters += data[city][cityClass]['ratings'][i].nps.promoters;
+    totalDetractors += data[city][cityClass]['ratings'][i].nps.detractors;
+  }
+  numSprints = data[city][cityClass]['ratings'].length;
+  nps = (totalPromotors - totalDetractors)/numSprints;
+
+
 }
