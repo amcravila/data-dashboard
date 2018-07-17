@@ -3,13 +3,10 @@ var hostCities = document.querySelectorAll('.hostCity');
 for(var i=0; i < hostCities.length; i++) {
   hostCities[i].addEventListener('click', selectedHostCity);
 }
-
 var selectedCity = document.getElementById('filterCity');
-
 function selectedHostCity(event) {
   var selectedCity = document.getElementById('filterCity').innerHTML = this.id;
 }
-
 
 //função selecionar TURMA
 var studentsClasses = document.querySelectorAll('.studentsClass');
@@ -18,9 +15,7 @@ for(var i=0; i < studentsClasses.length; i++) {
   studentsClasses[i].addEventListener('click', panel);
   // studentsClasses[i].addEventListener('mouseup', closeMenu);
 }
-
 var selectedClass = document.getElementById('filterClass');
-
 function selectedStudentClass() {
   var selectedClass = document.getElementById('filterClass').innerHTML = this.textContent;
 }
@@ -50,11 +45,11 @@ function panel() {
     studentsClasses[i].removeEventListener('click', panel);
   }
 
-  panelOne.addEventListener('click', panelOverview);
+  panelOne.addEventListener('click', studentStatus);
+  panelOne.addEventListener('click', netPromoterScore);
+  panelOne.addEventListener('click', average);
   panelTwo.addEventListener('click', panelStudents);
 }
-
-
 
 //função exibir dados na aba ESTUDANTES
 function panelStudents() {
@@ -104,36 +99,83 @@ function panelStudents() {
 
 
 //função exibir dados na aba OVERVIEW
-function panelOverview() {
-  alert("clicou Overview");
+function studentStatus() {
+  var city = selectedCity.textContent;
+  var cityClass = selectedClass.textContent;
+  var students = document.getElementById('students');
+  students.innerHTML = '';
 
   //função estudantes ativas e inativas
-    var activeStudents = 0;
-    var desertedStudents = 0;
-    var desertionStudentsRate = 0;
+  var activeStudents = 0;
+  var desertedStudents = 0;
+  var desertionStudentsRate = 0;
 
-    for(var i=0; i<data[city][cityClass]['students'].length; i++){
-       if(data[city][cityClass]['students'][i].active === true ){
-         activeStudents++;
-       }
-       else{
-         desertedStudents++;
-       }
-     }
-     totalStudents = activeStudents + desertedStudents;
-     desertionStudentsRate = desertedStudents/(desertedStudents+activeStudents)*100;
+  for(var i=0; i<data[city][cityClass]['students'].length; i++){
+    if(data[city][cityClass]['students'][i].active === true ){
+      activeStudents++;
+    }
+    else{
+      desertedStudents++;
+    }
+  }
+  totalStudents = activeStudents + desertedStudents;
+  desertionStudentsRate = desertedStudents/(desertedStudents+activeStudents)*100;
+  console.log('total ' +totalStudents);
+  console.log('ativas ' +activeStudents);
+  console.log('inativas ' +desertedStudents);
+  console.log('desligadas   '+ desertionStudentsRate);
+}
+
+//media alunas
+function average() {
+  var city = selectedCity.textContent;
+  var cityClass = selectedClass.textContent;
+  var students = document.getElementById('students');
+  students.innerHTML = '';
+  var studentArray = data[city][cityClass]['students'];
+  console.log(studentArray);
+  
+  for (j in data[city][cityClass]['students']) {
+    var ss = studentArray[j]['sprints'];
+    var sumSprintTotal = 0, sumSprintTotalH = 0;
+    for (var i = 0 ; i < ss.length ;i++) {
+      var notas = ss[i]['score'];
+      var scoreTech = ss[i]['score']['tech'];
+      console.log(scoreTech);
+      var scoreHse = ss[i]['score']['hse'];
+      sumSprintTotal = sumSprintTotal + scoreTech;
+      sumSprintTotalH = sumSprintTotalH + scoreHse;
+    }
+    var percentTech = (((sumSprintTotal / ss.length) / 1800) * 100).toFixed(2);
+    var percentHse = (((sumSprintTotalH / ss.length) / 1200) * 100).toFixed(2);
+    
+  }
+}
+  
 
 
 //função NPS
+function netPromoterScore(){
+  var city = selectedCity.textContent;
+  var cityClass = selectedClass.textContent;
+  var students = document.getElementById('students');
+  students.innerHTML = '';
   var totalPromoters = 0;
   var totalDetractors = 0;
   var numSprints = 0;
   var nps = 0;
+  var sprints = "";
+  var npsChart = [];
   for(var i = 0; i < data[city][cityClass]['ratings'].length; i++){
-    totalPromoters += data[city][cityClass]['ratings'][i].nps.promoters;
-    totalDetractors += data[city][cityClass]['ratings'][i].nps.detractors;
+    sprints = "S" + (i+1);
+    var promotersSprint = data[city][cityClass]['ratings'][i].nps.promoters;
+    var detractorsSprint = data[city][cityClass]['ratings'][i].nps.detractors;
+    var npsSprint = promotersSprint-detractorsSprint;
+    npsChart.push([sprints,npsSprint]);
+    totalPromoters += promotersSprint;
+    totalDetractors += detractorsSprint;
   }
   numSprints = data[city][cityClass]['ratings'].length;
-  nps = (totalPromotors - totalDetractors)/numSprints;
-
+  nps = (totalPromoters - totalDetractors)/numSprints;
+  return npsChart;
 }
