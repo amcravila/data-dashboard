@@ -65,38 +65,73 @@ function panelStudents() {
   for (j in data[city][cityClass]['students']) {
     if (studentArray[j]['active'] === true) {
       var ss = studentArray[j]['sprints'];
-      var sumSprintTotal = 0, sumSprintTotalH = 0;
+      var sumSprintTotal = 0;
+      var sumSprintTotalH = 0;
       for (var i = 0 ; i < ss.length ;i++) {
         var scoreTech = ss[i]['score']['tech'];
         var scoreHse = ss[i]['score']['hse'];
-        sumSprintTotal = sumSprintTotal + scoreTech;
-        sumSprintTotalH = sumSprintTotalH + scoreHse;
+        sumSprintTotal += scoreTech;
+        sumSprintTotalH += scoreHse;
       }
       var percentTech = (((sumSprintTotal / ss.length) / 1800) * 100).toFixed(2);
       var percentHse = (((sumSprintTotalH / ss.length) / 1200) * 100).toFixed(2);
+
+      // var divActives = document.createElement('div');
+      // divActives.setAttribute('id','actives');
+      // students.appendChild(divActives);
+      // var h2Actives = document.createElement('h2');
+      // h2Actives.innerHTML = "ATIVAS";
+      // divActives.appendChild(h2Actives);
+
+      var photoStudent = document.createElement('img');
+      photoStudent.src = data[city][cityClass]['students'][j]['photo'];
+      photoStudent.classList.add('studentPhoto');
+      students.appendChild(photoStudent);
+
+      var titlename = document.createElement('div');
+      titlename.textContent = studentArray[j]['name'];
+      titlename.classList.add('studentName');
+      students.appendChild(titlename);
+
+      var divtech = document.createElement('div');
+      divtech.textContent = "TECH SKILLS: " + percentTech + '% ' ;
+      divtech.classList.add('techSkills');
+      students.appendChild(divtech);
+
+      var hse = document.createElement('div');
+      hse.textContent = "HSE SKILLS: " + percentHse + '%';
+      hse.classList.add('hseSkills');
+      students.appendChild(hse);
+
+    } else {
+
+      // var divInactives = document.createElement('div');
+      // divInactives.setAttribute('id','Inactives');
+      // students.appendChild(divInactives);
+      // var h2Inactives = document.createElement('h2');
+      // h2Inactives.innerHTML = "INATIVAS";
+      // divInactives.appendChild(h2Inactives);
+
+      var photoStudent = document.createElement('img');
+      photoStudent.src = data[city][cityClass]['students'][j]['photo'];
+      photoStudent.classList.add('studentPhoto');
+      students.appendChild(photoStudent);
+
+      var titlename = document.createElement('div');
+      titlename.textContent = studentArray[j]['name'];
+      titlename.classList.add('studentName');
+      students.appendChild(titlename);
+
+      var divtech = document.createElement('div');
+      divtech.textContent = "TECH SKILLS: " + '(inativa)';
+      divtech.classList.add('techSkills');
+      students.appendChild(divtech);
+
+      var hse = document.createElement('div');
+      hse.textContent = "HSE SKILLS: " + '(inativa)';
+      hse.classList.add('hseSkills');
+      students.appendChild(hse);
     }
-
-    var sectionStudents = document.getElementById('students');
-
-    var photoStudent = document.createElement('img');
-    photoStudent.src = data[city][cityClass]['students'][j]['photo'];
-    photoStudent.classList.add('studentPhoto');
-    students.appendChild(photoStudent);
-
-    var titlename = document.createElement('div');
-    titlename.textContent = studentArray[j]['name'];
-    titlename.classList.add('studentName');
-    students.appendChild(titlename);
-
-    var divtech = document.createElement('div');
-    divtech.textContent = "TECH SKILLS: " + percentTech + '% ' ;
-    divtech.classList.add('techSkills');
-    students.appendChild(divtech);
-
-    var hse = document.createElement('div');
-    hse.textContent = "HSE SKILLS: " + percentHse + '%';
-    hse.classList.add('hseSkills');
-    students.appendChild(hse);
   }
 }
 
@@ -120,11 +155,15 @@ function studentStatus() {
     }
   }
   totalStudents = activeStudents + desertedStudents;
+<<<<<<< HEAD
   desertionStudentsRate = desertedStudents/(totalStudents)*100;
   studentStatusChart.push(activeStudents);
   studentStatusChart.push(desertedStudents);
   console.log(studentStatusChart);
   return studentStatusChart;
+=======
+  desertionStudentsRate = desertedStudents/(desertedStudents+activeStudents)*100;
+>>>>>>> f925c7e12d27bcf7c92c5c27ec44e35be985236c
 }
 
 //media alunas
@@ -134,25 +173,39 @@ function average() {
   var students = document.getElementById('students');
   students.innerHTML = '';
   var studentArray = data[city][cityClass]['students'];
+<<<<<<< HEAD
   // console.log(studentArray);
   
+=======
+
+>>>>>>> f925c7e12d27bcf7c92c5c27ec44e35be985236c
   for (j in data[city][cityClass]['students']) {
     var ss = studentArray[j]['sprints'];
     var sumSprintTotal = 0, sumSprintTotalH = 0;
     for (var i = 0 ; i < ss.length ;i++) {
       var notas = ss[i]['score'];
       var scoreTech = ss[i]['score']['tech'];
+<<<<<<< HEAD
       // console.log(scoreTech);
+=======
+>>>>>>> f925c7e12d27bcf7c92c5c27ec44e35be985236c
       var scoreHse = ss[i]['score']['hse'];
       sumSprintTotal = sumSprintTotal + scoreTech;
       sumSprintTotalH = sumSprintTotalH + scoreHse;
     }
     var percentTech = (((sumSprintTotal / ss.length) / 1800) * 100).toFixed(2);
     var percentHse = (((sumSprintTotalH / ss.length) / 1200) * 100).toFixed(2);
-    
+
   }
 }
+<<<<<<< HEAD
   
+=======
+
+
+
+
+>>>>>>> f925c7e12d27bcf7c92c5c27ec44e35be985236c
 //função NPS
 function netPromoterScore(){
   var city = selectedCity.textContent;
@@ -175,6 +228,7 @@ function netPromoterScore(){
   nps = (totalPromoters - totalDetractors)/numSprints;
   return npsChart;
 }
+<<<<<<< HEAD
 
 //Teacher rating
 function teacherRating(){
@@ -236,3 +290,5 @@ function satisfaction(){
   console.log(satisfactionChart);
   return satisfactionChart;
 }
+=======
+>>>>>>> f925c7e12d27bcf7c92c5c27ec44e35be985236c

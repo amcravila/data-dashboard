@@ -24,6 +24,23 @@ header {
   font-size: 50px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+
+#logoLab {
+  margin-left: 40px;
+}
+
+#vanessa {
+  border-radius: 50%;
+  margin-right: 40px;
+}
+
+#nameVanessa {
+  font-size: 14px;
+  font-weight: 700;
+  margin-left: 1000px;
+  margin-bottom: 0;
 }
 
 #menu {
@@ -96,12 +113,17 @@ ul li ul.dropDown li {
 }
 
 #filterCity, #filterClass {
-  font-size: 18px;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+#filter {
+  margin-top: 20px;
 }
 
 #tabs {
   padding: 0;
-  margin-top: 80px;
+  margin-top: 40px;
 }
 
 #hide {
@@ -119,6 +141,7 @@ ul li ul.dropDown li {
   height: 150px;
   border-radius: 50%;
   margin-top: 60px;
+  margin-left: 20px;
 }
 
 .studentName {
