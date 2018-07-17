@@ -76,52 +76,85 @@ function panelStudents() {
       }
       var percentTech = (((sumSprintTotal / ss.length) / 1800) * 100).toFixed(2);
       var percentHse = (((sumSprintTotalH / ss.length) / 1200) * 100).toFixed(2);
+
+      // var divActives = document.createElement('div');
+      // divActives.setAttribute('id','actives');
+      // students.appendChild(divActives);
+      // var h2Actives = document.createElement('h2');
+      // h2Actives.innerHTML = "ATIVAS";
+      // divActives.appendChild(h2Actives);
+
+      var photoStudent = document.createElement('img');
+      photoStudent.src = data[city][cityClass]['students'][j]['photo'];
+      photoStudent.classList.add('studentPhoto');
+      students.appendChild(photoStudent);
+
+      var titlename = document.createElement('div');
+      titlename.textContent = studentArray[j]['name'];
+      titlename.classList.add('studentName');
+      students.appendChild(titlename);
+
+      var divtech = document.createElement('div');
+      divtech.textContent = "TECH SKILLS: " + percentTech + '% ' ;
+      divtech.classList.add('techSkills');
+      students.appendChild(divtech);
+
+      var hse = document.createElement('div');
+      hse.textContent = "HSE SKILLS: " + percentHse + '%';
+      hse.classList.add('hseSkills');
+      students.appendChild(hse);
+
+    } else {
+
+      // var divInactives = document.createElement('div');
+      // divInactives.setAttribute('id','Inactives');
+      // students.appendChild(divInactives);
+      // var h2Inactives = document.createElement('h2');
+      // h2Inactives.innerHTML = "INATIVAS";
+      // divInactives.appendChild(h2Inactives);
+
+      var photoStudent = document.createElement('img');
+      photoStudent.src = data[city][cityClass]['students'][j]['photo'];
+      photoStudent.classList.add('studentPhoto');
+      students.appendChild(photoStudent);
+
+      var titlename = document.createElement('div');
+      titlename.textContent = studentArray[j]['name'];
+      titlename.classList.add('studentName');
+      students.appendChild(titlename);
+
+      var divtech = document.createElement('div');
+      divtech.textContent = "TECH SKILLS: " + '(inativa)';
+      divtech.classList.add('techSkills');
+      students.appendChild(divtech);
+
+      var hse = document.createElement('div');
+      hse.textContent = "HSE SKILLS: " + '(inativa)';
+      hse.classList.add('hseSkills');
+      students.appendChild(hse);
     }
-
-    var sectionStudents = document.getElementById('students');
-
-    var photoStudent = document.createElement('img');
-    photoStudent.src = data[city][cityClass]['students'][j]['photo'];
-    photoStudent.classList.add('studentPhoto');
-    students.appendChild(photoStudent);
-
-    var titlename = document.createElement('div');
-    titlename.textContent = studentArray[j]['name'];
-    titlename.classList.add('studentName');
-    students.appendChild(titlename);
-
-    var divtech = document.createElement('div');
-    divtech.textContent = "TECH SKILLS: " + percentTech + '% ' ;
-    divtech.classList.add('techSkills');
-    students.appendChild(divtech);
-
-    var hse = document.createElement('div');
-    hse.textContent = "HSE SKILLS: " + percentHse + '%';
-    hse.classList.add('hseSkills');
-    students.appendChild(hse);
   }
 }
 
 
 //função exibir dados na aba OVERVIEW
 function panelOverview() {
-  alert("clicou Overview");
 
   //função estudantes ativas e inativas
-    var activeStudents = 0;
-    var desertedStudents = 0;
-    var desertionStudentsRate = 0;
+  var activeStudents = 0;
+  var desertedStudents = 0;
+  var desertionStudentsRate = 0;
 
-    for(var i=0; i<data[city][cityClass]['students'].length; i++){
-       if(data[city][cityClass]['students'][i].active === true ){
-         activeStudents++;
-       }
-       else{
-         desertedStudents++;
-       }
-     }
-     totalStudents = activeStudents + desertedStudents;
-     desertionStudentsRate = desertedStudents/(desertedStudents+activeStudents)*100;
+  for(var i=0; i<data[city][cityClass]['students'].length; i++){
+    if(data[city][cityClass]['students'][i].active === true ){
+      activeStudents++;
+    }
+    else{
+      desertedStudents++;
+    }
+  }
+  totalStudents = activeStudents + desertedStudents;
+  desertionStudentsRate = desertedStudents/(desertedStudents+activeStudents)*100;
 
 
 //função NPS
@@ -134,6 +167,6 @@ function panelOverview() {
     totalDetractors += data[city][cityClass]['ratings'][i].nps.detractors;
   }
   numSprints = data[city][cityClass]['ratings'].length;
-  nps = (totalPromotors - totalDetractors)/numSprints;
+  nps = (totalPromoters - totalDetractors)/numSprints;
 
 }
