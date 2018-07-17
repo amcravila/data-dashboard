@@ -62,12 +62,13 @@ function panelStudents() {
   for (j in data[city][cityClass]['students']) {
     if (studentArray[j]['active'] === true) {
       var ss = studentArray[j]['sprints'];
-      var sumSprintTotal = 0, sumSprintTotalH = 0;
+      var sumSprintTotal = 0;
+      var sumSprintTotalH = 0;
       for (var i = 0 ; i < ss.length ;i++) {
         var scoreTech = ss[i]['score']['tech'];
         var scoreHse = ss[i]['score']['hse'];
-        sumSprintTotal = sumSprintTotal + scoreTech;
-        sumSprintTotalH = sumSprintTotalH + scoreHse;
+        sumSprintTotal += scoreTech;
+        sumSprintTotalH += scoreHse;
       }
       var percentTech = (((sumSprintTotal / ss.length) / 1800) * 100).toFixed(2);
       var percentHse = (((sumSprintTotalH / ss.length) / 1200) * 100).toFixed(2);
@@ -154,11 +155,6 @@ function studentStatus() {
   }
   totalStudents = activeStudents + desertedStudents;
   desertionStudentsRate = desertedStudents/(desertedStudents+activeStudents)*100;
-
-  console.log('total ' +totalStudents);
-  console.log('ativas ' +activeStudents);
-  console.log('inativas ' +desertedStudents);
-  console.log('desligadas   '+ desertionStudentsRate);
 }
 
 //media alunas
@@ -168,7 +164,6 @@ function average() {
   var students = document.getElementById('students');
   students.innerHTML = '';
   var studentArray = data[city][cityClass]['students'];
-  console.log(studentArray);
 
   for (j in data[city][cityClass]['students']) {
     var ss = studentArray[j]['sprints'];
@@ -176,7 +171,6 @@ function average() {
     for (var i = 0 ; i < ss.length ;i++) {
       var notas = ss[i]['score'];
       var scoreTech = ss[i]['score']['tech'];
-      console.log(scoreTech);
       var scoreHse = ss[i]['score']['hse'];
       sumSprintTotal = sumSprintTotal + scoreTech;
       sumSprintTotalH = sumSprintTotalH + scoreHse;
