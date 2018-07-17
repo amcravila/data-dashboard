@@ -155,15 +155,12 @@ function studentStatus() {
     }
   }
   totalStudents = activeStudents + desertedStudents;
-<<<<<<< HEAD
   desertionStudentsRate = desertedStudents/(totalStudents)*100;
   studentStatusChart.push(activeStudents);
   studentStatusChart.push(desertedStudents);
   console.log(studentStatusChart);
   return studentStatusChart;
-=======
-  desertionStudentsRate = desertedStudents/(desertedStudents+activeStudents)*100;
->>>>>>> f925c7e12d27bcf7c92c5c27ec44e35be985236c
+
 }
 
 //media alunas
@@ -173,22 +170,16 @@ function average() {
   var students = document.getElementById('students');
   students.innerHTML = '';
   var studentArray = data[city][cityClass]['students'];
-<<<<<<< HEAD
   // console.log(studentArray);
   
-=======
-
->>>>>>> f925c7e12d27bcf7c92c5c27ec44e35be985236c
   for (j in data[city][cityClass]['students']) {
     var ss = studentArray[j]['sprints'];
     var sumSprintTotal = 0, sumSprintTotalH = 0;
     for (var i = 0 ; i < ss.length ;i++) {
       var notas = ss[i]['score'];
       var scoreTech = ss[i]['score']['tech'];
-<<<<<<< HEAD
       // console.log(scoreTech);
-=======
->>>>>>> f925c7e12d27bcf7c92c5c27ec44e35be985236c
+
       var scoreHse = ss[i]['score']['hse'];
       sumSprintTotal = sumSprintTotal + scoreTech;
       sumSprintTotalH = sumSprintTotalH + scoreHse;
@@ -198,14 +189,7 @@ function average() {
 
   }
 }
-<<<<<<< HEAD
   
-=======
-
-
-
-
->>>>>>> f925c7e12d27bcf7c92c5c27ec44e35be985236c
 //função NPS
 function netPromoterScore(){
   var city = selectedCity.textContent;
@@ -228,7 +212,6 @@ function netPromoterScore(){
   nps = (totalPromoters - totalDetractors)/numSprints;
   return npsChart;
 }
-<<<<<<< HEAD
 
 //Teacher rating
 function teacherRating(){
@@ -290,5 +273,4 @@ function satisfaction(){
   console.log(satisfactionChart);
   return satisfactionChart;
 }
-=======
->>>>>>> f925c7e12d27bcf7c92c5c27ec44e35be985236c
+
