@@ -83,6 +83,13 @@ function panelStudents() {
       var techSkills = document.createTextNode(data[city][cityClass]['students'][j]['sprints']['tech']);
       tech.appendChild(techSkills);
       students.appendChild(tech);
+
+      var hse = document.createElement('span');
+      hse.textContent = "HSE SKILLS";
+      hse.setAttribute('id','hseSkills');
+      var hseSkills = document.createTextNode(data[city][cityClass]['students'][j]['sprints']['hse']);
+      hse.appendChild(hseSkills);
+      students.appendChild(hse);
       }
     }
 }

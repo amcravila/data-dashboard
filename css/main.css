@@ -111,6 +111,7 @@ ul li ul.dropDown li {
 #students {
   display: flex;
   flex-wrap: wrap;
+  width: 1000px;
 }
 
 #studentPhoto {
@@ -130,13 +131,13 @@ ul li ul.dropDown li {
 #techSkills {
   font-size: 20px;
   font-weight: 700;
-  margin-top: 60px;
+  margin: 60px 30px;
 }
 
 #hseSkills {
   font-size: 20px;
   font-weight: 700;
-  margin-top: 60px;
+  margin: 60px 30px;
 }
 
 
