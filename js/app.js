@@ -63,37 +63,44 @@ function panelStudents() {
   var students = document.getElementById('students');
   students.innerHTML = '';
 
-//está duplicando, entrando no array RATINGS
-  for (i in data[city][cityClass]) {
-    for (j in data[city][cityClass]['students']) {
-      var img = document.createElement('img');
-      img.setAttribute('id','studentPhoto');
-      img.src = data[city][cityClass]['students'][j]['photo'];
-      students.appendChild(img);
-
-      var sName = document.createElement('span');
-      sName.setAttribute('id','studentName');
-      var studentName = document.createTextNode(data[city][cityClass]['students'][j]['name']);
-      sName.appendChild(studentName);
-      students.appendChild(sName);
-
-      var tech = document.createElement('span');
-      tech.textContent = "TECH SKILLS";
-      tech.setAttribute('id','techSkills');
-      var techSkills = document.createTextNode(data[city][cityClass]['students'][j]['sprints']['tech']);
-      tech.appendChild(techSkills);
-      students.appendChild(tech);
-
-      var hse = document.createElement('span');
-      hse.textContent = "HSE SKILLS";
-      hse.setAttribute('id','hseSkills');
-      var hseSkills = document.createTextNode(data[city][cityClass]['students'][j]['sprints']['hse']);
-      hse.appendChild(hseSkills);
-      students.appendChild(hse);
+  var studentArray = data[city][cityClass]['students'];
+  for (j in data[city][cityClass]['students']) {
+    if (studentArray[j]['active'] === true) {
+      var ss = studentArray[j]['sprints'];
+      var sumSprintTotal = 0, sumSprintTotalH = 0;
+      for (var i = 0 ; i < ss.length ;i++) {
+        var scoreTech = ss[i]['score']['tech'];
+        var scoreHse = ss[i]['score']['hse'];
+        sumSprintTotal = sumSprintTotal + scoreTech;
+        sumSprintTotalH = sumSprintTotalH + scoreHse;
       }
+      var percentTech = (((sumSprintTotal / ss.length) / 1800) * 100).toFixed(2);
+      var percentHse = (((sumSprintTotalH / ss.length) / 1200) * 100).toFixed(2);
     }
-}
 
+    var sectionStudents = document.getElementById('students');
+
+    var photoStudent = document.createElement('img');
+    photoStudent.src = data[city][cityClass]['students'][j]['photo'];
+    photoStudent.classList.add('studentPhoto');
+    students.appendChild(photoStudent);
+
+    var titlename = document.createElement('div');
+    titlename.textContent = studentArray[j]['name'];
+    titlename.classList.add('studentName');
+    students.appendChild(titlename);
+
+    var divtech = document.createElement('div');
+    divtech.textContent = "TECH SKILLS: " + percentTech + '% ' ;
+    divtech.classList.add('techSkills');
+    students.appendChild(divtech);
+
+    var hse = document.createElement('div');
+    hse.textContent = "HSE SKILLS: " + percentHse + '%';
+    hse.classList.add('hseSkills');
+    students.appendChild(hse);
+  }
+}
 
 
 //função exibir dados na aba OVERVIEW
@@ -128,6 +135,5 @@ function panelOverview() {
   }
   numSprints = data[city][cityClass]['ratings'].length;
   nps = (totalPromotors - totalDetractors)/numSprints;
-
 
 }

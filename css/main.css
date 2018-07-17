@@ -114,31 +114,33 @@ ul li ul.dropDown li {
   width: 1010px;
 }
 
-#studentPhoto {
+.studentPhoto {
   width: 150px;
   height: 150px;
   border-radius: 50%;
   margin-top: 60px;
 }
 
-#studentName {
-  font-size: 20px;
+.studentName {
+  font-size: 24px;
   font-weight: 700;
   text-transform: uppercase;
   margin: 60px 30px;
-  width: 200px;
+  width: 300px;
 }
 
-#techSkills {
+.techSkills {
   font-size: 20px;
   font-weight: 700;
   margin: 60px 30px;
+  width: 150px;
 }
 
-#hseSkills {
+.hseSkills {
   font-size: 20px;
   font-weight: 700;
   margin: 60px 30px;
+  width: 150px;
 }
 
 
