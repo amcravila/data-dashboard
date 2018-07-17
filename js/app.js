@@ -1,3 +1,8 @@
+function logout() {
+  location.href= "index.html"
+}
+
+
 //função selecionar SEDE
 var hostCities = document.querySelectorAll('.hostCity');
 for(var i=0; i < hostCities.length; i++) {
@@ -189,7 +194,7 @@ function average() {
 
   }
 }
-  
+
 //função NPS
 function netPromoterScore(){
   var city = selectedCity.textContent;
