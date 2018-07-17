@@ -181,9 +181,6 @@ function average() {
   }
 }
 
-
-
-
 //função NPS
 function netPromoterScore(){
   var city = selectedCity.textContent;
