@@ -48,6 +48,9 @@ function panel() {
   panelOne.addEventListener('click', studentStatus);
   panelOne.addEventListener('click', netPromoterScore);
   panelOne.addEventListener('click', average);
+  panelOne.addEventListener('click', teacherRating);
+  panelOne.addEventListener('click', jediRating);
+  panelOne.addEventListener('click', satisfaction);
   panelTwo.addEventListener('click', panelStudents);
 }
 
@@ -133,18 +136,16 @@ function panelStudents() {
 }
 
 
-//função exibir dados na aba OVERVIEW
+//função estudantes ativas e inativas
 function studentStatus() {
   var city = selectedCity.textContent;
   var cityClass = selectedClass.textContent;
   var students = document.getElementById('students');
   students.innerHTML = '';
-
-  //função estudantes ativas e inativas
   var activeStudents = 0;
   var desertedStudents = 0;
   var desertionStudentsRate = 0;
-
+  var studentStatusChart = [];
   for(var i=0; i<data[city][cityClass]['students'].length; i++){
     if(data[city][cityClass]['students'][i].active === true ){
       activeStudents++;
@@ -154,7 +155,12 @@ function studentStatus() {
     }
   }
   totalStudents = activeStudents + desertedStudents;
-  desertionStudentsRate = desertedStudents/(desertedStudents+activeStudents)*100;
+  desertionStudentsRate = desertedStudents/(totalStudents)*100;
+  studentStatusChart.push(activeStudents);
+  studentStatusChart.push(desertedStudents);
+  console.log(studentStatusChart);
+  return studentStatusChart;
+
 }
 
 //media alunas
@@ -164,6 +170,7 @@ function average() {
   var students = document.getElementById('students');
   students.innerHTML = '';
   var studentArray = data[city][cityClass]['students'];
+  // console.log(studentArray);
 
   for (j in data[city][cityClass]['students']) {
     var ss = studentArray[j]['sprints'];
@@ -171,6 +178,8 @@ function average() {
     for (var i = 0 ; i < ss.length ;i++) {
       var notas = ss[i]['score'];
       var scoreTech = ss[i]['score']['tech'];
+      // console.log(scoreTech);
+
       var scoreHse = ss[i]['score']['hse'];
       sumSprintTotal = sumSprintTotal + scoreTech;
       sumSprintTotalH = sumSprintTotalH + scoreHse;
@@ -180,21 +189,18 @@ function average() {
 
   }
 }
-
+  
 //função NPS
 function netPromoterScore(){
   var city = selectedCity.textContent;
   var cityClass = selectedClass.textContent;
-  var students = document.getElementById('students');
-  students.innerHTML = '';
   var totalPromoters = 0;
   var totalDetractors = 0;
   var numSprints = 0;
   var nps = 0;
-  var sprints = "";
   var npsChart = [];
   for(var i = 0; i < data[city][cityClass]['ratings'].length; i++){
-    sprints = "S" + (i+1);
+    var sprints = "S" + (i+1);
     var promotersSprint = data[city][cityClass]['ratings'][i].nps.promoters;
     var detractorsSprint = data[city][cityClass]['ratings'][i].nps.detractors;
     var npsSprint = promotersSprint-detractorsSprint;
@@ -205,4 +211,65 @@ function netPromoterScore(){
   numSprints = data[city][cityClass]['ratings'].length;
   nps = (totalPromoters - totalDetractors)/numSprints;
   return npsChart;
+}
+
+//Teacher rating
+function teacherRating(){
+  var city = selectedCity.textContent;
+  var cityClass = selectedClass.textContent;
+  var teacherChart = [];
+  var ratingTotal = 0;
+  var averageRating = 0;
+  var i;
+  for(var i = 0; i < data[city][cityClass]['ratings'].length; i++){
+    var sprints = "S" + (i+1);
+    var ratingT = data[city][cityClass]['ratings'][i].teacher;
+    teacherChart.push([sprints,ratingT]);
+    ratingTotal +=ratingT;
+  }
+  averageRating = (ratingTotal/i).toFixed(2);
+  console.log(averageRating);
+  console.log(teacherChart);
+  return teacherChart;
+}
+
+//Jedi rating
+function jediRating(){
+  var city = selectedCity.textContent;
+  var cityClass = selectedClass.textContent;
+  var jediChart = [];
+  var ratingTotal = 0;
+  var averageRating = 0;
+  var i;
+  for(var i = 0; i < data[city][cityClass]['ratings'].length; i++){
+    var sprints = "S" + (i+1);
+    var ratingJ = data[city][cityClass]['ratings'][i].jedi;
+    jediChart.push([sprints,ratingJ]);
+    ratingTotal +=ratingJ;
+  }
+  averageRating = (ratingTotal/i).toFixed(2);
+  console.log(averageRating);
+  console.log(jediChart);
+  return jediChart;
+}
+
+//Students satisfaction
+function satisfaction(){
+  var city = selectedCity.textContent;
+  var cityClass = selectedClass.textContent;
+  var satisfactionChart = [];
+  var satisfactionAverage = 0;
+  for(var i = 0; i < data[city][cityClass]['ratings'].length; i++){
+    var sprints = "S" + (i+1);
+    var noCumpleSprint = data[city][cityClass]['ratings'][i]['student']['no-cumple'];
+    var cumpleSprint = data[city][cityClass]['ratings'][i].student.cumple;
+    var superaSprint = data[city][cityClass]['ratings'][i].student.supera;
+    var satisfacted = cumpleSprint + superaSprint;
+    satisfactionChart.push([sprints, satisfacted]);
+    satisfactionAverage += satisfacted;
+  }
+  satisfactionAverage = satisfactionAverage/i;
+  console.log(satisfactionAverage);
+  console.log(satisfactionChart);
+  return satisfactionChart;
 }
