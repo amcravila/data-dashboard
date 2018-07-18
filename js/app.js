@@ -410,6 +410,7 @@ function drawChart() {
   data1.addColumn('number', 'NPS')
   data1.addRows(netPromoterScore());
   var options1 ={
+    title: "Média NPS",
     width: 400,
     legend: { position: 'none' },
     xAxis:{
@@ -417,7 +418,7 @@ function drawChart() {
       label: 'NPS'
     },
     vAxis: {
-      title: "Média NPS",
+      title: "%",
       titleTextStyle: {fontSize: 11},
       ticks: [0,20,40,60,80,100],
       maxValue: 100
@@ -433,6 +434,7 @@ function drawChart() {
   data2.addColumn('number', 'Nota')
   data2.addRows(teacherRating());
   var options2 ={
+    title: "Nota Professor",
     width: 400,
     legend: { position: 'none' },
     xAxis:{
@@ -440,7 +442,7 @@ function drawChart() {
       label: 'Sprints'
     },
     vAxis: {
-      title: "Nota Professor",
+      title: "nota",
       titleTextStyle: {fontSize: 12},
       ticks: [0,1,2,3,4,5],
       maxValue: 5
@@ -456,6 +458,7 @@ function drawChart() {
   data3.addColumn('number', 'Nota')
   data3.addRows(jediRating());
   var options3 ={
+    title: "Nota Jedi",
     width: 400,
     legend: { position: 'none' },
     xAxis:{
@@ -463,7 +466,7 @@ function drawChart() {
       label: 'Sprints'
     },
     vAxis: {
-      title: "Nota Jedi",
+      title: "nota",
       titleTextStyle: {fontSize: 12},
       ticks: [0,1,2,3,4,5],
       maxValue: 5
@@ -479,6 +482,7 @@ function drawChart() {
   data4.addColumn('number', 'porc. satis')
   data4.addRows(netPromoterScore());
   var options4 ={
+    title:'Satisfação com a <L>',
     width: 400,
     legend: { position: 'none' },
     xAxis:{
@@ -486,7 +490,7 @@ function drawChart() {
       label: 'NPS'
     },
     vAxis: {
-      title: "Satisfação com a <L>",
+      title: "%",
       titleTextStyle: {fontSize: 11},
       ticks: [0,20,40,60,80,100],
       maxValue: 100
@@ -503,7 +507,7 @@ function drawChart() {
   data5.addRows(achievment());
   // Set chart options MELHORAR APARÊNCIA!!
   var options5 = {
-    'title':'Achievment',
+    'title':'Achievment of active students',
     "chartArea": {top: 50, width:"60%", height:"60%"},
     "width": 430,
     "height": 270
@@ -522,12 +526,13 @@ function drawChart() {
   data7.addRows(scoreHseSprint());
 
   var options7 = {
+    title: "HSE notas",
     chart: {
       title: 'HSE notas',
       subtitle: 'Sprint 1, Sprint 2, Sprint 3 and Sprint 4: Alunas',
     },
     vAxis: {
-      title: "HSE notas",
+      title: "pontos",
       titleTextStyle: {fontSize: 12},
       ticks: [0,200,400,600,800,1000,1200],
       maxValue: 1200
@@ -551,12 +556,13 @@ function drawChart() {
   data6.addRows(scoreTechSprint());
 
   var options6 = {
+    title: "Tech notas",
     chart: {
       title: 'tech notas',
       subtitle: 'Sprint 1, Sprint 2, Sprint 3, Sprint 4, and Average: Alunas',
     },
     vAxis: {
-      title: "tech notas",
+      title: "pontos",
       titleTextStyle: {fontSize: 12},
       ticks: [0,300,600,900,1200,1500,1800],
       maxValue: 1800
