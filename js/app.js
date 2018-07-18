@@ -17,21 +17,11 @@ var studentsClasses = document.querySelectorAll('.studentsClass');
 for(var i=0; i < studentsClasses.length; i++) {
   studentsClasses[i].addEventListener('click', selectedStudentClass);
   studentsClasses[i].addEventListener('click', panel);
-  // studentsClasses[i].addEventListener('click', clearPanel);
 }
 var selectedClass = document.getElementById('filterClass');
 function selectedStudentClass() {
   var selectedClass = document.getElementById('filterClass').innerHTML = this.textContent;
 }
-
-// function clearPanel{
-function clearPanel() {
-  document.getElementById("overview").className = "hide";
-  document.getElementById("students").className = "hide";
-  document.getElementById("divActiveStudents").className = "hide";
-  document.getElementById("divInactiveStudents").className = "hide";
-}
-
 
 
 //função exibir PAINEL/ABAS
@@ -70,11 +60,18 @@ function panelStudents() {
   var city = selectedCity.textContent;
   var cityClass = selectedClass.textContent;
   var students = document.getElementById('students');
+  // var overview = document.getElementById('overview');
 
+  var divA = document.getElementById('divActiveStudents');
+  var divI=document.getElementById('divInactiveStudents');
   students.innerHTML = '';
+  divA.innerHTML='';
+  divI.innerHTML='';
 
-  // divActiveStudents.innerHTML = '';
-  // divInactiveStudents.innerHTML = '';
+  document.getElementById("overview").className = "hide";
+  document.getElementById("students").className = "";
+  document.getElementById("divActiveStudents").className = "";
+  document.getElementById("divInactiveStudents").className = "";
 
   var divActiveStudents = document.getElementById('divActiveStudents');
   var pActives = document.createElement('p');
@@ -87,11 +84,6 @@ function panelStudents() {
   var pInactivesContent = document.createTextNode('INATIVAS');
   pInactives.appendChild(pInactivesContent);
   document.getElementById('divInactiveStudents').appendChild(pInactives);
-
-  document.getElementById("overview").className = "hide";
-  document.getElementById("students").className = "";
-  document.getElementById("students").className = "";
-  document.getElementById("students").className = "";
 
   var studentArray = data[city][cityClass]['students'];
 
@@ -165,10 +157,9 @@ function studentStatus() {
   // divActiveStudents.innerHTML = '';
   // divInactiveStudents.innerHTML = '';
 
-  document.getElementById("students").className = "hide";
+  students.className = "hide";
   document.getElementById("overview").className = "";
 
-  document.getElementById("overview").className = "";
   var activeStudents = 0;
   var desertedStudents = 0;
   var desertionStudentsRate = 0;

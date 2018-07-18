@@ -46,7 +46,7 @@ header {
 
 #photoVanessa {
   border-radius: 50%;
-  
+
 }
 
 #nameVanessa {
@@ -163,7 +163,7 @@ ul li ul.dropDown li {
 }
 
 .hide {
-  display: none;
+  display: none!important;
 }
 
 #students {
