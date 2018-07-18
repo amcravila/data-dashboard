@@ -152,12 +152,27 @@ ul li ul.dropDown li {
   width: 1010px;
 }
 
+#divActiveStudents {
+  display: flex;
+  flex-wrap: wrap;
+  width: 1010px;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+#divInactiveStudents {
+  display: flex;
+  flex-wrap: wrap;
+  width: 1010px;
+  font-size: 22px;
+  font-weight: 700;
+}
+
 .studentPhoto {
   width: 150px;
   height: 150px;
   border-radius: 50%;
   margin-top: 60px;
-  margin-left: 40px;
 }
 
 .studentName {
@@ -165,7 +180,7 @@ ul li ul.dropDown li {
   font-weight: 700;
   text-transform: uppercase;
   margin: 60px 30px;
-  width: 300px;
+  width: 250px;
 }
 
 .techSkills {

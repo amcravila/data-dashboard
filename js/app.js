@@ -17,7 +17,14 @@ var studentsClasses = document.querySelectorAll('.studentsClass');
 for(var i=0; i < studentsClasses.length; i++) {
   studentsClasses[i].addEventListener('click', selectedStudentClass);
   studentsClasses[i].addEventListener('click', panel);
-
+  // panelOne.addEventListener('click', studentStatus);
+  // panelOne.addEventListener('click', netPromoterScore);
+  // panelOne.addEventListener('click', average);
+  // panelOne.addEventListener('click', teacherRating);
+  // panelOne.addEventListener('click', jediRating);
+  // panelOne.addEventListener('click', satisfaction);
+  // panelOne.addEventListener('click', achievment);
+  // panelOne.addEventListener('click', drawChart);
 
   // studentsClasses[i].addEventListener('mouseup', closeMenu);
 }
@@ -36,6 +43,12 @@ function selectedStudentClass() {
 
 //função exibir PAINEL/ABAS
 function panel() {
+
+  // document.getElementById("overview").className = "hide";
+  // document.getElementById("students").className = "hide";
+  // document.getElementById("divActiveStudents").className = "hide";
+  // document.getElementById("divInactiveStudents").className = "hide";
+
   var panelOne = document.createElement('li');
   var tabOverview = document.createTextNode('OVERVIEW');
   panelOne.appendChild(tabOverview);
@@ -64,11 +77,27 @@ function panel() {
 
 //função exibir dados na aba ESTUDANTES
 function panelStudents() {
+
   var city = selectedCity.textContent;
   var cityClass = selectedClass.textContent;
   var students = document.getElementById('students');
+
   students.innerHTML = '';
+
+  var divActiveStudents = document.getElementById('divActiveStudents');
+  var pActives = document.createElement('p');
+  var pActivesContent = document.createTextNode('ATIVAS');
+  pActives.appendChild(pActivesContent);
+  document.getElementById('divActiveStudents').appendChild(pActives);
+
+  var divInactiveStudents = document.getElementById('divInactiveStudents');
+  var pInactives = document.createElement('p');
+  var pInactivesContent = document.createTextNode('INATIVAS');
+  pInactives.appendChild(pInactivesContent);
+  document.getElementById('divInactiveStudents').appendChild(pInactives);
+
   document.getElementById("overview").className = "hide";
+  document.getElementById("students").className = "";
 
   var studentArray = data[city][cityClass]['students'];
 
@@ -82,36 +111,30 @@ function panelStudents() {
         var scoreHse = ss[i]['score']['hse'];
         sumSprintTotal += scoreTech;
         sumSprintTotalH += scoreHse;
+
       }
       var percentTech = (((sumSprintTotal / ss.length) / 1800) * 100).toFixed(2);
       var percentHse = (((sumSprintTotalH / ss.length) / 1200) * 100).toFixed(2);
 
-      // var divActives = document.createElement('div');
-      // divActives.setAttribute('id','actives');
-      // students.appendChild(divActives);
-      // var h2Actives = document.createElement('h2');
-      // h2Actives.innerHTML = "ATIVAS";
-      // divActives.appendChild(h2Actives);
-
       var photoStudent = document.createElement('img');
       photoStudent.src = data[city][cityClass]['students'][j]['photo'];
       photoStudent.classList.add('studentPhoto');
-      students.appendChild(photoStudent);
+      divActiveStudents.appendChild(photoStudent);
 
       var titlename = document.createElement('div');
       titlename.textContent = studentArray[j]['name'];
       titlename.classList.add('studentName');
-      students.appendChild(titlename);
+      divActiveStudents.appendChild(titlename);
 
       var divtech = document.createElement('div');
       divtech.textContent = "Tech Skills: " + percentTech + '% ' ;
       divtech.classList.add('techSkills');
-      students.appendChild(divtech);
+      divActiveStudents.appendChild(divtech);
 
       var hse = document.createElement('div');
       hse.textContent = "HSE Skills: " + percentHse + '%';
       hse.classList.add('hseSkills');
-      students.appendChild(hse);
+      divActiveStudents.appendChild(hse);
 
     } else {
 
@@ -125,22 +148,22 @@ function panelStudents() {
       var photoStudent = document.createElement('img');
       photoStudent.src = data[city][cityClass]['students'][j]['photo'];
       photoStudent.classList.add('studentPhoto');
-      students.appendChild(photoStudent);
+      divInactiveStudents.appendChild(photoStudent);
 
       var titlename = document.createElement('div');
       titlename.textContent = studentArray[j]['name'];
       titlename.classList.add('studentName');
-      students.appendChild(titlename);
+      divInactiveStudents.appendChild(titlename);
 
       var divtech = document.createElement('div');
       divtech.textContent = "Tech Skills: " + '(inativa)';
       divtech.classList.add('techSkills');
-      students.appendChild(divtech);
+      divInactiveStudents.appendChild(divtech);
 
       var hse = document.createElement('div');
       hse.textContent = "HSE Skills: " + '(inativa)';
       hse.classList.add('hseSkills');
-      students.appendChild(hse);
+      divInactiveStudents.appendChild(hse);
     }
   }
 }
@@ -152,6 +175,9 @@ function studentStatus() {
   var cityClass = selectedClass.textContent;
   var students = document.getElementById('students');
   students.innerHTML = '';
+  divActiveStudents.innerHTML = '';
+  divInactiveStudents.innerHTML = '';
+
   document.getElementById("overview").className = "";
   var activeStudents = 0;
   var desertedStudents = 0;
@@ -183,11 +209,11 @@ function average() {
   // var scoreTechArray = [];
   // var scoreHseArray = [];
   var sprint = 0;
-  
+
   for (j in studentArray){
     var studentName = studentArray[j].name;
     console.log(studentName);
-  
+
     var ss = studentArray[j]['sprints'];
     console.log(ss);
     // var sumSprintTotal = 0, sumSprintTotalH = 0;
@@ -214,7 +240,7 @@ function average() {
       }
     }
   }
-  
+
 
   // var scoreTechTotal = [];
   // var scoreHseTotal = [];
@@ -226,7 +252,7 @@ function average() {
   //   }
   // }
   // var scoreSprint = 0;
-  
+
   console.log(scoreHseStudents);
   console.log('tech array  '+scoreTechStudents);
 
@@ -287,7 +313,7 @@ function achievment() {
   }
   var achievment = [['Não atingiram', (actStudents-upAverage)],['Atingiram a média', upAverage]];
   return achievment;
-}    
+}
 
 //função NPS
 function netPromoterScore(){
