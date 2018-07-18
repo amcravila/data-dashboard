@@ -17,8 +17,6 @@ var studentsClasses = document.querySelectorAll('.studentsClass');
 for(var i=0; i < studentsClasses.length; i++) {
   studentsClasses[i].addEventListener('click', selectedStudentClass);
   studentsClasses[i].addEventListener('click', panel);
-
-
   // studentsClasses[i].addEventListener('mouseup', closeMenu);
 }
 var selectedClass = document.getElementById('filterClass');
@@ -53,7 +51,8 @@ function panel() {
 
   panelOne.addEventListener('click', studentStatus);
   panelOne.addEventListener('click', netPromoterScore);
-  panelOne.addEventListener('click', average);
+  panelOne.addEventListener('click', scoreHseSprint);
+  panelOne.addEventListener('click', scoreTechSprint);
   panelOne.addEventListener('click', teacherRating);
   panelOne.addEventListener('click', jediRating);
   panelOne.addEventListener('click', satisfaction);
@@ -68,7 +67,7 @@ function panelStudents() {
   var cityClass = selectedClass.textContent;
   var students = document.getElementById('students');
   students.innerHTML = '';
-  document.getElementById("overview").className = "hide";
+  overview.innerHTML = '';
 
   var studentArray = data[city][cityClass]['students'];
 
@@ -104,12 +103,12 @@ function panelStudents() {
       students.appendChild(titlename);
 
       var divtech = document.createElement('div');
-      divtech.textContent = "Tech Skills: " + percentTech + '% ' ;
+      divtech.textContent = "TECH SKILLS: " + percentTech + '% ' ;
       divtech.classList.add('techSkills');
       students.appendChild(divtech);
 
       var hse = document.createElement('div');
-      hse.textContent = "HSE Skills: " + percentHse + '%';
+      hse.textContent = "HSE SKILLS: " + percentHse + '%';
       hse.classList.add('hseSkills');
       students.appendChild(hse);
 
@@ -133,12 +132,12 @@ function panelStudents() {
       students.appendChild(titlename);
 
       var divtech = document.createElement('div');
-      divtech.textContent = "Tech Skills: " + '(inativa)';
+      divtech.textContent = "TECH SKILLS: " + '(inativa)';
       divtech.classList.add('techSkills');
       students.appendChild(divtech);
 
       var hse = document.createElement('div');
-      hse.textContent = "HSE Skills: " + '(inativa)';
+      hse.textContent = "HSE SKILLS: " + '(inativa)';
       hse.classList.add('hseSkills');
       students.appendChild(hse);
     }
@@ -152,7 +151,6 @@ function studentStatus() {
   var cityClass = selectedClass.textContent;
   var students = document.getElementById('students');
   students.innerHTML = '';
-  document.getElementById("overview").className = "";
   var activeStudents = 0;
   var desertedStudents = 0;
   var desertionStudentsRate = 0;
@@ -173,66 +171,55 @@ function studentStatus() {
   return studentStatusChart;
 }
 
-//media alunas
-function average() {
+//HSE notas
+function scoreHseSprint() {
+  var city = selectedCity.textContent;
+  var cityClass = selectedClass.textContent;
+  var studentArray = data[city][cityClass]['students'];
+  var scoreHseStudents = [];
+  const maxSprints = 4;
+  const average = 840;
+  for (j in studentArray){
+    var sprintsQuant = 0;
+    var ss = studentArray[j]['sprints'];
+    var studentScoreHse = [studentArray[j].name];
+    for(var i in ss){
+      var scoreHse = ss[i]['score']['hse'];
+      studentScoreHse.push(scoreHse);
+      sprintsQuant++;
+    }
+    for(var k = sprintsQuant; k<maxSprints; k++){
+      studentScoreHse.push(0);
+    }
+    studentScoreHse.push(average);    
+    scoreHseStudents.push(studentScoreHse);
+  }
+  return scoreHseStudents;
+}
+//Tech notas
+function scoreTechSprint() {
   var city = selectedCity.textContent;
   var cityClass = selectedClass.textContent;
   var studentArray = data[city][cityClass]['students'];
   var scoreTechStudents = [];
-  var scoreHseStudents = [];
-  // var scoreTechArray = [];
-  // var scoreHseArray = [];
-  var sprint = 0;
-  
+  const maxSprints = 4;
+  const average = 1260;
   for (j in studentArray){
-    var studentName = studentArray[j].name;
-    console.log(studentName);
-  
+    var sprintsQuant = 0;
     var ss = studentArray[j]['sprints'];
-    console.log(ss);
-    // var sumSprintTotal = 0, sumSprintTotalH = 0;
-    // var numSprints = 0;
-
+    var studentScoreTech = [studentArray[j].name];
     for(var i in ss){
-      var sprint = ss[i]['number'];
       var scoreTech = ss[i]['score']['tech'];
-      var scoreHse = ss[i]['score']['hse'];
-      scoreHseStudents.push([sprint,scoreHse]);
-      scoreTechStudents.push([sprint,scoreTech]);
-      // sumSprintTotal +=scoreTech;
-      // sumSprintTotalH +=scoreHse;
-      // numSprints++;
+      studentScoreTech.push(scoreTech);
+      sprintsQuant++;
     }
-    // scoreTechArray.push(parseFloat((sumSprintTotal/numSprints).toFixed(2)));
-    // scoreHseArray.push(parseFloat((sumSprintTotalH/numSprints).toFixed(2)));
-  }
-  var scoreSprint = [];
-  for (var s = sprint; s>0; s--){
-    for (var k=0; k<scoreHseStudents.length; k++){
-      if(scoreHseStudents[k][0]== s){
-        scoreSprint
-      }
+    for(var k = sprintsQuant; k<maxSprints; k++){
+      studentScoreTech.push(0);
     }
+    studentScoreTech.push(average);
+    scoreTechStudents.push(studentScoreTech);
   }
-  
-
-  // var scoreTechTotal = [];
-  // var scoreHseTotal = [];
-  // for(var k = 0; k<scoreTechArray.length; k++){
-  //   if(!isNaN(scoreTechArray[k])){
-  //     scoreTechTotal.push(scoreTechArray[k]);
-  //     scoreHseTotal.push(scoreHseArray[k]);
-
-  //   }
-  // }
-  // var scoreSprint = 0;
-  
-  console.log(scoreHseStudents);
-  console.log('tech array  '+scoreTechStudents);
-
-  // console.log(scoreHseTotal);
-  // console.log('tech array  '+scoreTechTotal);
-  // return scoreSprint;
+  return scoreTechStudents;
 }
 
 //alunas atingiram as medias
@@ -379,7 +366,8 @@ function satisfaction(){
 google.charts.load('current', {'packages':['corechart']});
 
 google.charts.setOnLoadCallback(studentStatus);
-google.charts.setOnLoadCallback(average);
+google.charts.setOnLoadCallback(scoreHseSprint);
+google.charts.setOnLoadCallback(scoreTechSprint);
 google.charts.setOnLoadCallback(netPromoterScore);
 google.charts.setOnLoadCallback(teacherRating);
 google.charts.setOnLoadCallback(jediRating);
@@ -401,8 +389,6 @@ function drawChart() {
   };
   var chart = new google.visualization.PieChart(document.getElementById("status"));
   chart.draw(data, options);
-
-  //average
 
   //netPromoterScore
   var data1 = new google.visualization.DataTable();
@@ -510,4 +496,62 @@ function drawChart() {
   };
   var chart2 = new google.visualization.PieChart(document.getElementById("achievment"));
   chart2.draw(data5, options5);
+
+  //HSE score
+  var data7 = new google.visualization.DataTable();
+  data7.addColumn('string', 'Aluna');
+  data7.addColumn('number','S1');
+  data7.addColumn('number','S2');
+  data7.addColumn('number','S4');
+  data7.addColumn('number','S4');
+  data7.addColumn('number','Average');
+  data7.addRows(scoreHseSprint());
+
+  var options7 = {
+    chart: {
+      title: 'HSE notas',
+      subtitle: 'Sprint 1, Sprint 2, Sprint 3 and Sprint 4: Alunas',
+    },
+    vAxis: {
+      title: "HSE notas",
+      titleTextStyle: {fontSize: 12},
+      ticks: [0,200,400,600,800,1000,1200],
+      maxValue: 1200
+    },
+    seriesType: 'bars',
+    series: {4: {type: 'line'}
+    }
+  };
+  var chart7 = new google.visualization.ColumnChart(document.getElementById("hse"));
+  chart7.draw(data7, options7);
+
+
+  //Tech score
+  var data6 = new google.visualization.DataTable();
+  data6.addColumn('string', 'Aluna');
+  data6.addColumn('number','S1');
+  data6.addColumn('number','S2');
+  data6.addColumn('number','S4');
+  data6.addColumn('number','S4');
+  data6.addColumn('number','Average');
+  data6.addRows(scoreTechSprint());
+
+  var options6 = {
+    chart: {
+      title: 'tech notas',
+      subtitle: 'Sprint 1, Sprint 2, Sprint 3, Sprint 4, and Average: Alunas',
+    },
+    vAxis: {
+      title: "tech notas",
+      titleTextStyle: {fontSize: 12},
+      ticks: [0,300,600,900,1200,1500,1800],
+      maxValue: 1800
+    },
+    seriesType: 'bars',
+    series: {4: {type: 'line'}
+    }
+  };
+  var chart6 = new google.visualization.ColumnChart(document.getElementById("tech"));
+  chart6.draw(data6, options6);
 }
+
