@@ -167,28 +167,49 @@ function studentStatus() {
 function average() {
   var city = selectedCity.textContent;
   var cityClass = selectedClass.textContent;
-  var students = document.getElementById('students');
-  students.innerHTML = '';
   var studentArray = data[city][cityClass]['students'];
-  // console.log(studentArray);
   
-  for (j in data[city][cityClass]['students']) {
+  var sprint = 0;
+
+  for (j in studentArray){
+    var studentName = studentArray[j].name;
+    console.log(studentName);
     var ss = studentArray[j]['sprints'];
+    console.log(ss);
     var sumSprintTotal = 0, sumSprintTotalH = 0;
-    for (var i = 0 ; i < ss.length ;i++) {
-      var notas = ss[i]['score'];
+    var scoreTechStudents = [];
+    var scoreHseStudents = [];
+    
+    for(var i in ss){
+      var sprint = ss[i]['number'];
       var scoreTech = ss[i]['score']['tech'];
-      // console.log(scoreTech);
-
       var scoreHse = ss[i]['score']['hse'];
-      sumSprintTotal = sumSprintTotal + scoreTech;
-      sumSprintTotalH = sumSprintTotalH + scoreHse;
-    }
-    var percentTech = (((sumSprintTotal / ss.length) / 1800) * 100).toFixed(2);
-    var percentHse = (((sumSprintTotalH / ss.length) / 1200) * 100).toFixed(2);
+      scoreHseStudents.push([sprint,scoreHse]);
+      scoreTechStudents.push([sprint,scoreTech]);
+      console.log(sprint + 'tech '+ scoreTech +' /hse ' + scoreHse);
 
+    }
+    console.log(JSON.stringify(scoreHseChart) );
   }
-}
+}    
+  // for (j in data[city][cityClass]['students']) {
+  //   var ss = studentArray[j]['sprints'];
+  //   var sumSprintTotal = 0, sumSprintTotalH = 0;
+  //   var scoreTechChart = [];
+  //   var scoreHseChart = [];
+  //   for (var i = 0 ; i < ss.length ;i++) {
+  //     var sprints = 'S' +(i+1);
+  //     var scoreTech = ss[i]['score']['tech'];
+  //     var scoreHse = ss[i]['score']['hse'];
+      
+  //     sumSprintTotal = sumSprintTotal + scoreTech;
+  //     sumSprintTotalH = sumSprintTotalH + scoreHse;
+  //   }
+  //   var percentTech = (((sumSprintTotal / ss.length) / 1800) * 100).toFixed(2);
+  //   var percentHse = (((sumSprintTotalH / ss.length) / 1200) * 100).toFixed(2);
+
+  // }
+
   
 //função NPS
 function netPromoterScore(){
@@ -273,4 +294,3 @@ function satisfaction(){
   console.log(satisfactionChart);
   return satisfactionChart;
 }
-
