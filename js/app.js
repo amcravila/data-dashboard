@@ -2,7 +2,6 @@ function logout() {
   location.href= "index.html"
 }
 
-
 //função selecionar SEDE
 var hostCities = document.querySelectorAll('.hostCity');
 for(var i=0; i < hostCities.length; i++) {
@@ -13,7 +12,7 @@ function selectedHostCity(event) {
   var selectedCity = document.getElementById('filterCity').innerHTML = this.id;
 }
 
-//função selecionar TURMA
+
 var studentsClasses = document.querySelectorAll('.studentsClass');
 for(var i=0; i < studentsClasses.length; i++) {
   studentsClasses[i].addEventListener('click', selectedStudentClass);
@@ -66,8 +65,10 @@ function panelStudents() {
   var cityClass = selectedClass.textContent;
   var students = document.getElementById('students');
   students.innerHTML = '';
+  overview.innerHTML = '';
 
   var studentArray = data[city][cityClass]['students'];
+
   for (j in data[city][cityClass]['students']) {
     if (studentArray[j]['active'] === true) {
       var ss = studentArray[j]['sprints'];
@@ -152,8 +153,8 @@ function studentStatus() {
   var desertedStudents = 0;
   var desertionStudentsRate = 0;
   var studentStatusChart = [];
-  for(var i=0; i<data[city][cityClass]['students'].length; i++){
-    if(data[city][cityClass]['students'][i].active === true ){
+  for(var i=0; i < data[city][cityClass]['students'].length; i++){
+    if(data[city][cityClass]['students'][i]['active'] === true ){
       activeStudents++;
     }
     else{
@@ -166,7 +167,6 @@ function studentStatus() {
   studentStatusChart.push(['desistentes',desertedStudents]);
   console.log('return ' +studentStatusChart);
   return studentStatusChart;
-
 }
 
 //media alunas
@@ -192,7 +192,7 @@ function average() {
     console.log(ss);
     var sumSprintTotal = 0, sumSprintTotalH = 0;
     var numSprints = 0;
-    
+
     for(var i in ss){
       var sprint = ss[i]['number'];
       var scoreTech = ss[i]['score']['tech'];
@@ -209,21 +209,21 @@ function average() {
   const averageHse = 840;
   const averageTech = 1260;
   var upAverage = 0;
-  
+
   var scoreTechTotal = [];
   var scoreHseTotal = [];
   for(var k = 0; k<scoreTechArray.length; k++){
     if(!isNaN(scoreTechArray[k])){
       scoreTechTotal.push(scoreTechArray[k]);
       scoreHseTotal.push(scoreHseArray[k]);
-      
+
     }
     if(scoreTechTotal[k]>= averageTech && scoreHseTotal[k]>=averageHse){
       console.log(scoreTechTotal[k], scoreHseTotal[k]);
       upAverage++;
     }
   }
-  
+
   console.log('total alunas turma = ' + (k));
   console.log('total alunas ativas = '+ (actStudents));
   console.log('total alunas atingiram média em Tech & Hse = '+ (upAverage));
@@ -231,7 +231,7 @@ function average() {
   console.log('tech array  '+scoreTechStudents);
   console.log(scoreHseTotal);
   console.log('tech array  '+scoreTechTotal);
-} 
+}
 
 //função NPS
 function netPromoterScore(){
@@ -356,7 +356,7 @@ function drawChart() {
     width: 400,
     legend: { position: 'none' },
     xAxis:{
-      side: 'bottom', 
+      side: 'bottom',
       label: 'NPS'
     },
     vAxis: {
@@ -379,7 +379,7 @@ function drawChart() {
     width: 400,
     legend: { position: 'none' },
     xAxis:{
-      side: 'bottom', 
+      side: 'bottom',
       label: 'Sprints'
     },
     vAxis: {
@@ -402,7 +402,7 @@ function drawChart() {
     width: 400,
     legend: { position: 'none' },
     xAxis:{
-      side: 'bottom', 
+      side: 'bottom',
       label: 'Sprints'
     },
     vAxis: {
@@ -425,7 +425,7 @@ function drawChart() {
     width: 400,
     legend: { position: 'none' },
     xAxis:{
-      side: 'bottom', 
+      side: 'bottom',
       label: 'NPS'
     },
     vAxis: {

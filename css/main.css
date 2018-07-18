@@ -55,6 +55,13 @@ header {
   padding: 0;
   list-style: none;
   background-color: #EBEBEB;
+  padding-left: 10px;
+}
+
+hr {
+  width: 145px;
+  margin-left: 8px;
+  border: 1px solid #000;
 }
 
 .dropDown {
@@ -123,6 +130,7 @@ ul li ul.dropDown li {
 #filterCity, #filterClass {
   font-size: 22px;
   font-weight: 700;
+  padding-left: 12px;
 }
 
 #filter {
@@ -149,7 +157,7 @@ ul li ul.dropDown li {
   height: 150px;
   border-radius: 50%;
   margin-top: 60px;
-  margin-left: 20px;
+  margin-left: 40px;
 }
 
 .studentName {
