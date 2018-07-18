@@ -17,6 +17,8 @@ var studentsClasses = document.querySelectorAll('.studentsClass');
 for(var i=0; i < studentsClasses.length; i++) {
   studentsClasses[i].addEventListener('click', selectedStudentClass);
   studentsClasses[i].addEventListener('click', panel);
+
+
   // studentsClasses[i].addEventListener('mouseup', closeMenu);
 }
 var selectedClass = document.getElementById('filterClass');
@@ -65,7 +67,7 @@ function panelStudents() {
   var cityClass = selectedClass.textContent;
   var students = document.getElementById('students');
   students.innerHTML = '';
-  overview.innerHTML = '';
+  document.getElementById("overview").className = "hide";
 
   var studentArray = data[city][cityClass]['students'];
 
@@ -101,12 +103,12 @@ function panelStudents() {
       students.appendChild(titlename);
 
       var divtech = document.createElement('div');
-      divtech.textContent = "TECH SKILLS: " + percentTech + '% ' ;
+      divtech.textContent = "Tech Skills: " + percentTech + '% ' ;
       divtech.classList.add('techSkills');
       students.appendChild(divtech);
 
       var hse = document.createElement('div');
-      hse.textContent = "HSE SKILLS: " + percentHse + '%';
+      hse.textContent = "HSE Skills: " + percentHse + '%';
       hse.classList.add('hseSkills');
       students.appendChild(hse);
 
@@ -130,12 +132,12 @@ function panelStudents() {
       students.appendChild(titlename);
 
       var divtech = document.createElement('div');
-      divtech.textContent = "TECH SKILLS: " + '(inativa)';
+      divtech.textContent = "Tech Skills: " + '(inativa)';
       divtech.classList.add('techSkills');
       students.appendChild(divtech);
 
       var hse = document.createElement('div');
-      hse.textContent = "HSE SKILLS: " + '(inativa)';
+      hse.textContent = "HSE Skills: " + '(inativa)';
       hse.classList.add('hseSkills');
       students.appendChild(hse);
     }
@@ -149,6 +151,7 @@ function studentStatus() {
   var cityClass = selectedClass.textContent;
   var students = document.getElementById('students');
   students.innerHTML = '';
+  document.getElementById("overview").className = "";
   var activeStudents = 0;
   var desertedStudents = 0;
   var desertionStudentsRate = 0;
