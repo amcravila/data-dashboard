@@ -173,20 +173,24 @@ function average() {
   var city = selectedCity.textContent;
   var cityClass = selectedClass.textContent;
   var studentArray = data[city][cityClass]['students'];
-
-  
+  var scoreTechStudents = [];
+  var scoreHseStudents = [];
+  var scoreTechArray = [];
+  var scoreHseArray = [];
   var sprint = 0;
+  var actStudents = 0;
 
   for (j in studentArray){
     var studentName = studentArray[j].name;
     console.log(studentName);
-
+    if(studentArray[j].active === true){
+      actStudents++;
+    }
 
     var ss = studentArray[j]['sprints'];
     console.log(ss);
     var sumSprintTotal = 0, sumSprintTotalH = 0;
-    var scoreTechStudents = [];
-    var scoreHseStudents = [];
+    var numSprints = 0;
     
     for(var i in ss){
       var sprint = ss[i]['number'];
@@ -194,12 +198,38 @@ function average() {
       var scoreHse = ss[i]['score']['hse'];
       scoreHseStudents.push([sprint,scoreHse]);
       scoreTechStudents.push([sprint,scoreTech]);
-      console.log(sprint + 'tech '+ scoreTech +' /hse ' + scoreHse);
-
+      sumSprintTotal +=scoreTech;
+      sumSprintTotalH +=scoreHse;
+      numSprints++;
     }
-    console.log(JSON.stringify(scoreHseChart) );
+    scoreTechArray.push(parseFloat((sumSprintTotal/numSprints).toFixed(2)));
+    scoreHseArray.push(parseFloat((sumSprintTotalH/numSprints).toFixed(2)));
   }
-
+  const averageHse = 840;
+  const averageTech = 1260;
+  var upAverage = 0;
+  
+  var scoreTechTotal = [];
+  var scoreHseTotal = [];
+  for(var k = 0; k<scoreTechArray.length; k++){
+    if(!isNaN(scoreTechArray[k])){
+      scoreTechTotal.push(scoreTechArray[k]);
+      scoreHseTotal.push(scoreHseArray[k]);
+      
+    }
+    if(scoreTechTotal[k]>= averageTech && scoreHseTotal[k]>=averageHse){
+      console.log(scoreTechTotal[k], scoreHseTotal[k]);
+      upAverage++;
+    }
+  }
+  
+  console.log('total alunas turma = ' + (k));
+  console.log('total alunas ativas = '+ (actStudents));
+  console.log('total alunas atingiram média em Tech & Hse = '+ (upAverage));
+  console.log(scoreHseStudents);
+  console.log('tech array  '+scoreTechStudents);
+  console.log(scoreHseTotal);
+  console.log('tech array  '+scoreTechTotal);
 }    
   // for (j in data[city][cityClass]['students']) {
   //   var ss = studentArray[j]['sprints'];
