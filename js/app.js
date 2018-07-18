@@ -17,28 +17,15 @@ var studentsClasses = document.querySelectorAll('.studentsClass');
 for(var i=0; i < studentsClasses.length; i++) {
   studentsClasses[i].addEventListener('click', selectedStudentClass);
   studentsClasses[i].addEventListener('click', panel);
-  // studentsClasses[i].addEventListener('mouseup', closeMenu);
 }
 var selectedClass = document.getElementById('filterClass');
 function selectedStudentClass() {
   var selectedClass = document.getElementById('filterClass').innerHTML = this.textContent;
 }
 
-// function closeMenu(){
-//   var menuDrop = document.getElementsByClassName('dropDown')[0];
-//   for(var i=0; i < menuDrop.length; i++) {
-//     menuDrop.setAttibuteID('id','hide');
-//   }
-// }
-
 
 //função exibir PAINEL/ABAS
 function panel() {
-
-  // document.getElementById("overview").className = "hide";
-  // document.getElementById("students").className = "hide";
-  // document.getElementById("divActiveStudents").className = "hide";
-  // document.getElementById("divInactiveStudents").className = "hide";
 
   var panelOne = document.createElement('li');
   var tabOverview = document.createTextNode('OVERVIEW');
@@ -75,21 +62,20 @@ function panelStudents() {
   var students = document.getElementById('students');
 
   students.innerHTML = '';
-  
+
   var divActiveStudents = document.getElementById('divActiveStudents');
+  divActiveStudents.innerHTML = '';
   var pActives = document.createElement('p');
   var pActivesContent = document.createTextNode('ATIVAS');
   pActives.appendChild(pActivesContent);
   document.getElementById('divActiveStudents').appendChild(pActives);
 
   var divInactiveStudents = document.getElementById('divInactiveStudents');
+  divInactiveStudents.innerHTML = '';
   var pInactives = document.createElement('p');
   var pInactivesContent = document.createTextNode('INATIVAS');
   pInactives.appendChild(pInactivesContent);
   document.getElementById('divInactiveStudents').appendChild(pInactives);
-
-  document.getElementById("overview").className = "hide";
-  document.getElementById("students").className = "";
 
   var studentArray = data[city][cityClass]['students'];
 
@@ -129,13 +115,6 @@ function panelStudents() {
       divActiveStudents.appendChild(hse);
 
     } else {
-
-      // var divInactives = document.createElement('div');
-      // divInactives.setAttribute('id','Inactives');
-      // students.appendChild(divInactives);
-      // var h2Inactives = document.createElement('h2');
-      // h2Inactives.innerHTML = "INATIVAS";
-      // divInactives.appendChild(h2Inactives);
 
       var photoStudent = document.createElement('img');
       photoStudent.src = data[city][cityClass]['students'][j]['photo'];
