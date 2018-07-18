@@ -56,6 +56,7 @@ function panel() {
   panelOne.addEventListener('click', teacherRating);
   panelOne.addEventListener('click', jediRating);
   panelOne.addEventListener('click', satisfaction);
+  panelOne.addEventListener('click', drawChart);
   panelTwo.addEventListener('click', panelStudents);
 }
 
@@ -161,9 +162,9 @@ function studentStatus() {
   }
   totalStudents = activeStudents + desertedStudents;
   desertionStudentsRate = desertedStudents/(totalStudents)*100;
-  studentStatusChart.push(activeStudents);
-  studentStatusChart.push(desertedStudents);
-  console.log(studentStatusChart);
+  studentStatusChart.push(['ativas',activeStudents]);
+  studentStatusChart.push(['desistentes',desertedStudents]);
+  console.log('return ' +studentStatusChart);
   return studentStatusChart;
 
 }
@@ -230,26 +231,7 @@ function average() {
   console.log('tech array  '+scoreTechStudents);
   console.log(scoreHseTotal);
   console.log('tech array  '+scoreTechTotal);
-}    
-  // for (j in data[city][cityClass]['students']) {
-  //   var ss = studentArray[j]['sprints'];
-  //   var sumSprintTotal = 0, sumSprintTotalH = 0;
-  //   var scoreTechChart = [];
-  //   var scoreHseChart = [];
-  //   for (var i = 0 ; i < ss.length ;i++) {
-  //     var sprints = 'S' +(i+1);
-  //     var scoreTech = ss[i]['score']['tech'];
-  //     var scoreHse = ss[i]['score']['hse'];
-      
-  //     sumSprintTotal = sumSprintTotal + scoreTech;
-  //     sumSprintTotalH = sumSprintTotalH + scoreHse;
-  //   }
-  //   var percentTech = (((sumSprintTotal / ss.length) / 1800) * 100).toFixed(2);
-  //   var percentHse = (((sumSprintTotalH / ss.length) / 1200) * 100).toFixed(2);
-
-  // }
-
-  
+} 
 
 //função NPS
 function netPromoterScore(){
@@ -271,6 +253,7 @@ function netPromoterScore(){
   }
   numSprints = data[city][cityClass]['ratings'].length;
   nps = (totalPromoters - totalDetractors)/numSprints;
+  console.log(npsChart);
   return npsChart;
 }
 
@@ -336,3 +319,123 @@ function satisfaction(){
 
 }
 
+//GRAFICOS
+google.charts.load('current', {'packages':['corechart']});
+
+google.charts.setOnLoadCallback(studentStatus);
+google.charts.setOnLoadCallback(average);
+google.charts.setOnLoadCallback(netPromoterScore);
+google.charts.setOnLoadCallback(teacherRating);
+google.charts.setOnLoadCallback(jediRating);
+google.charts.setOnLoadCallback(satisfaction);
+
+function drawChart() {
+  // studentStatus
+  var data = new google.visualization.DataTable();
+  data.addColumn('string', 'Status');
+  data.addColumn('number', 'Quant. de alunas')
+  data.addRows(studentStatus());
+  // Set chart options MELHORAR APARÊNCIA!!
+  var options = {
+    'title':'Enrollment',
+    "chartArea": {top: 50, width:"60%", height:"60%"},
+    "width": 430,
+    "height": 270
+  };
+  var chart = new google.visualization.PieChart(document.getElementById("status"));
+  chart.draw(data, options);
+
+  //average
+
+  //netPromoterScore
+  var data1 = new google.visualization.DataTable();
+  data1.addColumn('string', 'Sprint');
+  data1.addColumn('number', 'NPS')
+  data1.addRows(netPromoterScore());
+  var options1 ={
+    width: 400,
+    legend: { position: 'none' },
+    xAxis:{
+      side: 'bottom', 
+      label: 'NPS'
+    },
+    vAxis: {
+      title: "Média NPS",
+      titleTextStyle: {fontSize: 11},
+      ticks: [0,20,40,60,80,100],
+      maxValue: 100
+    },
+    bar: { groupWidth: "90%" }
+  }
+  var visualization = new google.visualization.ColumnChart(document.getElementById("nps"));
+  visualization.draw(data1, options1);
+
+  //teacherRating
+  var data2 = new google.visualization.DataTable();
+  data2.addColumn('string', 'Sprint');
+  data2.addColumn('number', 'Nota')
+  data2.addRows(teacherRating());
+  var options2 ={
+    width: 400,
+    legend: { position: 'none' },
+    xAxis:{
+      side: 'bottom', 
+      label: 'Sprints'
+    },
+    vAxis: {
+      title: "Nota Professor",
+      titleTextStyle: {fontSize: 12},
+      ticks: [0,1,2,3,4,5],
+      maxValue: 5
+    },
+    bar: { groupWidth: "90%" }
+  }
+  var visualization2 = new google.visualization.ColumnChart(document.getElementById("teacher"));
+  visualization2.draw(data2, options2);
+
+  //jediRating
+  var data3 = new google.visualization.DataTable();
+  data3.addColumn('string', 'Sprint');
+  data3.addColumn('number', 'Nota')
+  data3.addRows(jediRating());
+  var options3 ={
+    width: 400,
+    legend: { position: 'none' },
+    xAxis:{
+      side: 'bottom', 
+      label: 'Sprints'
+    },
+    vAxis: {
+      title: "Nota Jedi",
+      titleTextStyle: {fontSize: 12},
+      ticks: [0,1,2,3,4,5],
+      maxValue: 5
+    },
+    bar: { groupWidth: "90%" }
+  }
+  var visualization3 = new google.visualization.ColumnChart(document.getElementById("jedi"));
+  visualization3.draw(data3, options3);
+
+  //satisfaction
+  var data4 = new google.visualization.DataTable();
+  data4.addColumn('string', 'Sprint');
+  data4.addColumn('number', 'porc. satis')
+  data4.addRows(netPromoterScore());
+  var options4 ={
+    width: 400,
+    legend: { position: 'none' },
+    xAxis:{
+      side: 'bottom', 
+      label: 'NPS'
+    },
+    vAxis: {
+      title: "Satisfação com a <L>",
+      titleTextStyle: {fontSize: 11},
+      ticks: [0,20,40,60,80,100],
+      maxValue: 100
+    },
+    bar: { groupWidth: "90%" }
+  }
+  var visualization4 = new google.visualization.ColumnChart(document.getElementById("satisfacted"));
+  visualization4.draw(data4, options4);
+}
