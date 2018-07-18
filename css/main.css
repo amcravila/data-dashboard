@@ -197,6 +197,10 @@ ul li ul.dropDown li {
   width: 150px;
 }
 
+#status h3 {
+  display: block;
+  
+}
 
 
 /* Números e Títulos: font-family: 'Bitter', serif;*/

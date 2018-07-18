@@ -17,11 +17,22 @@ var studentsClasses = document.querySelectorAll('.studentsClass');
 for(var i=0; i < studentsClasses.length; i++) {
   studentsClasses[i].addEventListener('click', selectedStudentClass);
   studentsClasses[i].addEventListener('click', panel);
+  // studentsClasses[i].addEventListener('click', clearPanel);
 }
 var selectedClass = document.getElementById('filterClass');
 function selectedStudentClass() {
   var selectedClass = document.getElementById('filterClass').innerHTML = this.textContent;
 }
+
+// function clearPanel{
+function clearPanel() {
+  document.getElementById("overview").className = "hide";
+  document.getElementById("students").className = "hide";
+  document.getElementById("divActiveStudents").className = "hide";
+  document.getElementById("divInactiveStudents").className = "hide";
+}
+
+
 
 //função exibir PAINEL/ABAS
 function panel() {
@@ -59,25 +70,27 @@ function panelStudents() {
   var city = selectedCity.textContent;
   var cityClass = selectedClass.textContent;
   var students = document.getElementById('students');
-  var divA = document.getElementById('divActiveStudents');
-  var divI=document.getElementById('divInactiveStudents');
+
   students.innerHTML = '';
-  divA.innerHTML='';
-  divI.innerHTML='';
+  // divActiveStudents.innerHTML = '';
+  // divInactiveStudents.innerHTML = '';
 
   var divActiveStudents = document.getElementById('divActiveStudents');
-  divActiveStudents.innerHTML = '';
   var pActives = document.createElement('p');
   var pActivesContent = document.createTextNode('ATIVAS');
   pActives.appendChild(pActivesContent);
   document.getElementById('divActiveStudents').appendChild(pActives);
 
   var divInactiveStudents = document.getElementById('divInactiveStudents');
-  divInactiveStudents.innerHTML = '';
   var pInactives = document.createElement('p');
   var pInactivesContent = document.createTextNode('INATIVAS');
   pInactives.appendChild(pInactivesContent);
   document.getElementById('divInactiveStudents').appendChild(pInactives);
+
+  document.getElementById("overview").className = "hide";
+  document.getElementById("students").className = "";
+  document.getElementById("students").className = "";
+  document.getElementById("students").className = "";
 
   var studentArray = data[city][cityClass]['students'];
 
