@@ -17,20 +17,11 @@ var studentsClasses = document.querySelectorAll('.studentsClass');
 for(var i=0; i < studentsClasses.length; i++) {
   studentsClasses[i].addEventListener('click', selectedStudentClass);
   studentsClasses[i].addEventListener('click', panel);
-  // studentsClasses[i].addEventListener('mouseup', closeMenu);
 }
 var selectedClass = document.getElementById('filterClass');
 function selectedStudentClass() {
   var selectedClass = document.getElementById('filterClass').innerHTML = this.textContent;
 }
-
-// function closeMenu(){
-//   var menuDrop = document.getElementsByClassName('dropDown')[0];
-//   for(var i=0; i < menuDrop.length; i++) {
-//     menuDrop.setAttibuteID('id','hide');
-//   }
-// }
-
 
 //função exibir PAINEL/ABAS
 function panel() {
@@ -73,8 +64,11 @@ function panelStudents() {
   var city = selectedCity.textContent;
   var cityClass = selectedClass.textContent;
   var students = document.getElementById('students');
-
+  var divA = document.getElementById('divActiveStudents');
+  var divI=document.getElementById('divInactiveStudents');
   students.innerHTML = '';
+  divA.innerHTML='';
+  divI.innerHTML='';
   
   var divActiveStudents = document.getElementById('divActiveStudents');
   var pActives = document.createElement('p');
