@@ -224,6 +224,7 @@ ul li ul.dropDown li {
   align-self: center;
 }
 
+<<<<<<< HEAD
 #divActiveStudents p, #divInactiveStudents p {
   left: 105px;
   position: absolute;
@@ -240,5 +241,6 @@ ul li ul.dropDown li {
   width: 100%;
   justify-content: space-around;
 }
+
 
 /* Números e Títulos: font-family: 'Bitter', serif;*/
