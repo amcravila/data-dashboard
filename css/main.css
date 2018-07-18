@@ -24,44 +24,57 @@ header {
   font-size: 50px;
   display: flex;
   align-items: center;
-  /* justify-content: space-between; */
+  justify-content: space-between;
+}
+#profile{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+}
+#pic{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
 }
 
 #logoLab {
-  margin-left: 40px;
+  width: 90px;
+  margin: 10px;
 }
 
 #photoVanessa {
   border-radius: 50%;
-  margin-left: 10px;
+  
 }
 
 #nameVanessa {
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 700;
-  margin-left: 1000px;
-  margin-bottom: 0;
 }
 
 #logout {
   font-size: 12px;
   font-weight: 700;
-  color: grey;
-  margin-top: 70px;
-  margin-left: -60px;
+  background-color: transparent;
+  border: 0;
+  color: rgba(61, 60, 60, 0.829);
 }
 
 #menu {
   padding: 0;
   list-style: none;
-  background-color: #EBEBEB;
+  background-color: black;
   padding-left: 10px;
+  color: #FFE521;
 }
 
-hr {
-  width: 145px;
-  margin-left: 8px;
-  border: 1px solid #000;
+hr{
+  width: 170px;
+  text-align: left;
+  margin-left: 0;
+  border: black 1px solid;
 }
 
 .dropDown {
@@ -70,41 +83,47 @@ hr {
 }
 
 ul li {
-  background-color: #EBEBEB;
+  color: #FFE521;
+  background-color: black;
   display: inline-block;
   position: relative;
   line-height: 40px;
-  text-align: left;
-  padding-right: 20px;
+  text-align: center;
+  padding: 0 22px;
+  margin: 0;
 }
 
-ul {
-  margin: 0;
+ul, nav, li {
+  margin: 0 ;
+  padding: 0 ;
 }
 
 #menu li {
   display: inline-block;
   position: relative;
   line-height: 40px;
-  text-align: left;
-  padding-right: 0;
+  text-align: center;
+  padding: 0;
   transition: all 0.10s linear;
   width: 160px;
+  border: 0;
+  margin: 0;
 }
 
 ul li a {
   display: block;
-  color: #000;
+  color:#FFE521;
   text-decoration: none;
 }
 
 #menu li a:hover {
-  color: #fff;
+  color: #FFE521;
+  background: #333232;
 }
 
 ul li:hover {
-  color: #fff;
-  background: #939393;
+  color: #FFE521;
+  background: #333232;
   cursor: pointer;
 }
 
@@ -134,12 +153,13 @@ ul li ul.dropDown li {
 }
 
 #filter {
-  margin-top: 20px;
+  margin: 15px;
 }
 
 #tabs {
-  padding: 0;
-  margin-top: 40px;
+  padding-left: 42px;
+  background-color: black;
+  font-weight: 800;
 }
 
 .hide {
@@ -158,6 +178,7 @@ ul li ul.dropDown li {
   width: 1010px;
   font-size: 22px;
   font-weight: 700;
+  padding: 3px 50px;
 }
 
 #divInactiveStudents {
@@ -166,6 +187,7 @@ ul li ul.dropDown li {
   width: 1010px;
   font-size: 22px;
   font-weight: 700;
+  padding: 3px 50px;
 }
 
 .studentPhoto {
@@ -197,6 +219,12 @@ ul li ul.dropDown li {
   width: 150px;
 }
 
-
+#divActiveStudents p, #divInactiveStudents p {
+  left: 105px;
+  position: absolute;
+  margin: 8px;
+  padding: 5px;
+  font-size: 32px;
+}
 
 /* Números e Títulos: font-family: 'Bitter', serif;*/
