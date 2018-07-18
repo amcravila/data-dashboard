@@ -57,6 +57,7 @@ function panel() {
   panelOne.addEventListener('click', teacherRating);
   panelOne.addEventListener('click', jediRating);
   panelOne.addEventListener('click', satisfaction);
+  panelOne.addEventListener('click', achievment);
   panelOne.addEventListener('click', drawChart);
   panelTwo.addEventListener('click', panelStudents);
 }
@@ -179,22 +180,18 @@ function average() {
   var studentArray = data[city][cityClass]['students'];
   var scoreTechStudents = [];
   var scoreHseStudents = [];
-  var scoreTechArray = [];
-  var scoreHseArray = [];
+  // var scoreTechArray = [];
+  // var scoreHseArray = [];
   var sprint = 0;
-  var actStudents = 0;
-
+  
   for (j in studentArray){
     var studentName = studentArray[j].name;
     console.log(studentName);
-    if(studentArray[j].active === true){
-      actStudents++;
-    }
-
+  
     var ss = studentArray[j]['sprints'];
     console.log(ss);
-    var sumSprintTotal = 0, sumSprintTotalH = 0;
-    var numSprints = 0;
+    // var sumSprintTotal = 0, sumSprintTotalH = 0;
+    // var numSprints = 0;
 
     for(var i in ss){
       var sprint = ss[i]['number'];
@@ -202,39 +199,95 @@ function average() {
       var scoreHse = ss[i]['score']['hse'];
       scoreHseStudents.push([sprint,scoreHse]);
       scoreTechStudents.push([sprint,scoreTech]);
-      sumSprintTotal +=scoreTech;
-      sumSprintTotalH +=scoreHse;
-      numSprints++;
+      // sumSprintTotal +=scoreTech;
+      // sumSprintTotalH +=scoreHse;
+      // numSprints++;
     }
-    scoreTechArray.push(parseFloat((sumSprintTotal/numSprints).toFixed(2)));
-    scoreHseArray.push(parseFloat((sumSprintTotalH/numSprints).toFixed(2)));
+    // scoreTechArray.push(parseFloat((sumSprintTotal/numSprints).toFixed(2)));
+    // scoreHseArray.push(parseFloat((sumSprintTotalH/numSprints).toFixed(2)));
   }
-  const averageHse = 840;
-  const averageTech = 1260;
-  var upAverage = 0;
-
-  var scoreTechTotal = [];
-  var scoreHseTotal = [];
-  for(var k = 0; k<scoreTechArray.length; k++){
-    if(!isNaN(scoreTechArray[k])){
-      scoreTechTotal.push(scoreTechArray[k]);
-      scoreHseTotal.push(scoreHseArray[k]);
-
-    }
-    if(scoreTechTotal[k]>= averageTech && scoreHseTotal[k]>=averageHse){
-      console.log(scoreTechTotal[k], scoreHseTotal[k]);
-      upAverage++;
+  var scoreSprint = [];
+  for (var s = sprint; s>0; s--){
+    for (var k=0; k<scoreHseStudents.length; k++){
+      if(scoreHseStudents[k][0]== s){
+        scoreSprint
+      }
     }
   }
+  
 
-  console.log('total alunas turma = ' + (k));
-  console.log('total alunas ativas = '+ (actStudents));
-  console.log('total alunas atingiram média em Tech & Hse = '+ (upAverage));
+  // var scoreTechTotal = [];
+  // var scoreHseTotal = [];
+  // for(var k = 0; k<scoreTechArray.length; k++){
+  //   if(!isNaN(scoreTechArray[k])){
+  //     scoreTechTotal.push(scoreTechArray[k]);
+  //     scoreHseTotal.push(scoreHseArray[k]);
+
+  //   }
+  // }
+  // var scoreSprint = 0;
+  
   console.log(scoreHseStudents);
   console.log('tech array  '+scoreTechStudents);
-  console.log(scoreHseTotal);
-  console.log('tech array  '+scoreTechTotal);
+
+  // console.log(scoreHseTotal);
+  // console.log('tech array  '+scoreTechTotal);
+  // return scoreSprint;
 }
+
+//alunas atingiram as medias
+function achievment() {
+  var city = selectedCity.textContent;
+  var cityClass = selectedClass.textContent;
+  var studentArray = data[city][cityClass]['students'];
+  var scoreTechStudents = [];
+  var scoreHseStudents = [];
+  var scoreTechArray = [];
+  var scoreHseArray = [];
+  var sprint = 0;
+  var actStudents = 0;
+
+  for (j in studentArray){
+    if(studentArray[j].active === true){
+      actStudents++;
+      var ss = studentArray[j]['sprints'];
+      var sumSprintTotal = 0, sumSprintTotalH = 0;
+      var numSprints = 0;
+      for(var i in ss){
+        var sprint = ss[i]['number'];
+        var scoreTech = ss[i]['score']['tech'];
+        var scoreHse = ss[i]['score']['hse'];
+        scoreHseStudents.push([sprint,scoreHse]);
+        scoreTechStudents.push([sprint,scoreTech]);
+        sumSprintTotal +=scoreTech;
+        sumSprintTotalH +=scoreHse;
+        numSprints++;
+      }
+      scoreTechArray.push(parseFloat((sumSprintTotal/numSprints).toFixed(2)));
+      scoreHseArray.push(parseFloat((sumSprintTotalH/numSprints).toFixed(2)));
+
+      const averageHse = 840;
+      const averageTech = 1260;
+      var upAverage = 0;
+
+      var scoreTechTotal = [];
+      var scoreHseTotal = [];
+      for(var k = 0; k<scoreTechArray.length; k++){
+        if(!isNaN(scoreTechArray[k])){
+          scoreTechTotal.push(scoreTechArray[k]);
+          scoreHseTotal.push(scoreHseArray[k]);
+
+        }
+        if(scoreTechArray[k]>= averageTech && scoreHseArray[k]>= averageHse){
+          console.log('notas ' +scoreTechArray[k], scoreHseArray[k]);
+          upAverage++;
+        }
+      }
+    }
+  }
+  var achievment = [['Não atingiram', (actStudents-upAverage)],['Atingiram a média', upAverage]];
+  return achievment;
+}    
 
 //função NPS
 function netPromoterScore(){
@@ -331,6 +384,7 @@ google.charts.setOnLoadCallback(netPromoterScore);
 google.charts.setOnLoadCallback(teacherRating);
 google.charts.setOnLoadCallback(jediRating);
 google.charts.setOnLoadCallback(satisfaction);
+google.charts.setOnLoadCallback(achievment);
 
 function drawChart() {
   // studentStatus
@@ -441,4 +495,19 @@ function drawChart() {
   }
   var visualization4 = new google.visualization.ColumnChart(document.getElementById("satisfacted"));
   visualization4.draw(data4, options4);
+
+  //alunas que atingiram a média
+  var data5 = new google.visualization.DataTable();
+  data5.addColumn('string', 'Status');
+  data5.addColumn('number', 'Quant. de alunas')
+  data5.addRows(achievment());
+  // Set chart options MELHORAR APARÊNCIA!!
+  var options5 = {
+    'title':'Achievment',
+    "chartArea": {top: 50, width:"60%", height:"60%"},
+    "width": 430,
+    "height": 270
+  };
+  var chart2 = new google.visualization.PieChart(document.getElementById("achievment"));
+  chart2.draw(data5, options5);
 }
