@@ -23,7 +23,6 @@ function selectedStudentClass() {
   var selectedClass = document.getElementById('filterClass').innerHTML = this.textContent;
 }
 
-
 //função exibir PAINEL/ABAS
 function panel() {
 
@@ -60,8 +59,11 @@ function panelStudents() {
   var city = selectedCity.textContent;
   var cityClass = selectedClass.textContent;
   var students = document.getElementById('students');
-
+  var divA = document.getElementById('divActiveStudents');
+  var divI=document.getElementById('divInactiveStudents');
   students.innerHTML = '';
+  divA.innerHTML='';
+  divI.innerHTML='';
 
   var divActiveStudents = document.getElementById('divActiveStudents');
   divActiveStudents.innerHTML = '';
