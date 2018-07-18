@@ -72,6 +72,7 @@ function panelStudents() {
   var students = document.getElementById('students');
 
   students.innerHTML = '';
+
   // divActiveStudents.innerHTML = '';
   // divInactiveStudents.innerHTML = '';
 
@@ -160,9 +161,12 @@ function studentStatus() {
   var city = selectedCity.textContent;
   var cityClass = selectedClass.textContent;
   var students = document.getElementById('students');
-  students.innerHTML = '';
-  divActiveStudents.innerHTML = '';
-  divInactiveStudents.innerHTML = '';
+  // students.innerHTML = '';
+  // divActiveStudents.innerHTML = '';
+  // divInactiveStudents.innerHTML = '';
+
+  document.getElementById("students").className = "hide";
+  document.getElementById("overview").className = "";
 
   document.getElementById("overview").className = "";
   var activeStudents = 0;
