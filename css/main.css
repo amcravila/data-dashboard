@@ -231,5 +231,14 @@ ul li ul.dropDown li {
   padding: 5px;
   font-size: 32px;
 }
+#overview{
+  display: flex;
+  flex-direction: column;
+}
+.rows{
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
 
 /* Números e Títulos: font-family: 'Bitter', serif;*/
