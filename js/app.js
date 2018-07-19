@@ -60,7 +60,6 @@ function panelStudents() {
   var city = selectedCity.textContent;
   var cityClass = selectedClass.textContent;
   var students = document.getElementById('students');
-  // var overview = document.getElementById('overview');
 
   var divA = document.getElementById('divActiveStudents');
   var divI=document.getElementById('divInactiveStudents');
@@ -153,12 +152,12 @@ function studentStatus() {
   var city = selectedCity.textContent;
   var cityClass = selectedClass.textContent;
   var students = document.getElementById('students');
-  // students.innerHTML = '';
-  // divActiveStudents.innerHTML = '';
-  // divInactiveStudents.innerHTML = '';
+
+  document.getElementById("overview").className = "";
 
   students.className = "hide";
-  document.getElementById("overview").className = "";
+  document.getElementById("divActiveStudents").className = "hide";
+  document.getElementById("divInactiveStudents").className = "hide";
 
   var activeStudents = 0;
   var desertedStudents = 0;
